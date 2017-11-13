@@ -1,0 +1,168 @@
+<div *ngIf="animal$ | async; let animal">
+  <div fxLayout
+       fxLayoutAlign="start center"
+       fxLayoutGap="12px">
+    <h2>{{animal.name}}</h2>
+    <a mat-icon-button
+       [routerLink]="['../../../../']"
+       color="primary">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+    <span fxFlex></span>
+    <a mat-mini-fab
+       [routerLink]="['../switch']"
+       color="primary"
+       matTooltip="Changer le propriétaire"
+       matTooltipPosition="left">
+      <mat-icon>swap_horiz</mat-icon>
+    </a>
+    <a mat-fab
+       [routerLink]="['../update']"
+       color="primary"
+       matTooltip="Editer l'animal"
+       matTooltipPosition="left">
+      <mat-icon>edit</mat-icon>
+    </a>
+  </div>
+
+  <h3>Détails</h3>
+  <div fxLayout="column"
+       fxLayoutGap="12px"
+       class="mat-elevation-z4 app-simple-table">
+
+    <mat-card class="mat-elevation-z0"
+              fxLayout
+              fxLayoutAlign="start stretch">
+      <div fxFlex
+           fxLayout
+           fxLayoutAlign="start center">
+        <span fxFlex="1 1 150px">Race</span>
+        <span fxFlex>{{animal.breed | unhash }}</span>
+      </div>
+    </mat-card>
+
+    <mat-card class="mat-elevation-z0"
+              fxLayout
+              fxLayoutAlign="start stretch">
+      <div fxFlex
+           fxLayout
+           fxLayoutAlign="start center">
+        <span fxFlex="1 1 150px">Sexe</span>
+        <span fxFlex
+              [style.paddingTop.px]="6">
+          <ng-container [ngSwitch]="animal.sex">
+            <mat-icon svgIcon="gender_male"
+                    *ngSwitchCase="'male'"></mat-icon>
+            <mat-icon svgIcon="gender_female"
+                    *ngSwitchCase="'female'"></mat-icon>
+            <mat-icon svgIcon="gender_undefined"
+                    *ngSwitchCase="'undefined'"></mat-icon>
+          </ng-container>
+        </span>
+      </div>
+    </mat-card>
+
+    <mat-card class="mat-elevation-z0"
+              fxLayout
+              fxLayoutAlign="start stretch">
+      <div fxFlex
+           fxLayout
+           fxLayoutAlign="start center">
+        <span fxFlex="1 1 150px">Date de naissance</span>
+        <span fxFlex>{{animal.birthday | date: 'shortDate'}}</span>
+      </div>
+    </mat-card>
+
+    <mat-expansion-panel *ngIf="animal.background"
+                         class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span>Antécédents</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container>
+        {{animal.background}}
+      </ng-container>
+    </mat-expansion-panel>
+  </div>
+
+</div>
+
+
+
+<div fxLayout
+     fxLayoutAlign="start center"
+     fxLayoutGap="12px">
+  <h3>Consultations</h3>
+  <span fxFlex></span>
+  <a mat-mini-fab
+     [routerLink]="['../consultation-lazy/consultations', 'add']"
+     color="primary"
+     matTooltip="Ajouter une consultation"
+     matTooltipPosition="left">
+    <mat-icon>add</mat-icon>
+  </a>
+</div>
+
+<div fxLayout
+     fxLayoutAlign="start center">
+  <mat-form-field fxFlex="1 1 auto">
+    <mat-select placeholder="Statut"
+                (change)="this.dataSource.filter$$.next($event.value)">
+      <mat-option value="programmed">Programmée</mat-option>
+      <mat-option value="canceled">Annulée</mat-option>
+      <mat-option value="done">Terminée</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<mat-table [dataSource]="dataSource"
+           matSort
+           matSortActive="name"
+           matSortDisableClear
+           matSortDirection="asc"
+           class="mat-elevation-z4">
+
+  <ng-container cdkColumnDef="reason">
+    <mat-header-cell *cdkHeaderCellDef
+                     mat-sort-header> Raison </mat-header-cell>
+    <mat-cell *cdkCellDef="let row"> {{row.reason}} </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="date">
+    <mat-header-cell *cdkHeaderCellDef
+                     mat-sort-header> Date </mat-header-cell>
+    <mat-cell *cdkCellDef="let row"> {{row.date | date: 'short'}} </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="status">
+    <mat-header-cell *cdkHeaderCellDef
+                     mat-sort-header> Statut </mat-header-cell>
+    <mat-cell *cdkCellDef="let row">
+      <span fxFlex
+            [ngSwitch]="row.status">
+  <p *ngSwitchCase="consultationStatus.consultationDone">Terminée</p>
+  <p *ngSwitchCase="consultationStatus.consultationProgrammed">Programmée</p>
+  <p *ngSwitchCase="consultationStatus.consultationCanceled">Annulée</p>
+  <p *ngSwitchCase="consultationStatus.consultationTransferred">Transférée</p>
+  </span>
+    </mat-cell>
+  </ng-container>
+
+
+  <ng-container cdkColumnDef="details">
+    <mat-header-cell *cdkHeaderCellDef
+                     [style.maxWidth.px]="50"> Détails </mat-header-cell>
+    <mat-cell *cdkCellDef="let row"
+              [style.maxWidth.px]="50">
+      <a mat-icon-button
+         color="primary"
+         [routerLink]="['../consultation-lazy', 'consultation', row.$key]">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *cdkHeaderRowDef="fields"></mat-header-row>
+  <mat-row *cdkRowDef="let row; columns: fields;"></mat-row>
+</mat-table>

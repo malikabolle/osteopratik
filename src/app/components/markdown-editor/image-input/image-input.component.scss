@@ -1,0 +1,11 @@
+// @import '~@angular/material/theming';
+:host {
+    display: inline-block;
+    div {
+        display: inline-block;
+    }
+    input[type="file"],
+    input[type="text"] {
+        display: none;
+    }
+}

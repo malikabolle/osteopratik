@@ -1,0 +1,10 @@
+@import './../../../common/styles/mixins.scss';
+:host {
+    @include default-width();
+    @include app-simple-table();
+    display: block;
+    box-sizing: border-box;
+    mat-form-field {
+        width: 100%;
+    }
+}

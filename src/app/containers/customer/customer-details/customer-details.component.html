@@ -1,0 +1,224 @@
+<div *ngIf="customer$ | async; let customer">
+  <div fxLayout
+       fxLayoutAlign="start center"
+       fxLayoutGap="12px">
+    <h2>{{customer.firstName}} {{customer.lastName}}</h2>
+    <a mat-icon-button
+       [routerLink]="['../../../customers']"
+       color="primary">
+      <mat-icon>arrow_back</mat-icon>
+    </a>
+    <span fxFlex></span>
+    <a mat-mini-fab
+       [routerLink]="['../switch']"
+       color="primary"
+       matTooltip="Transmettre le client"
+       matTooltipPosition="left">
+      <mat-icon>swap_horiz</mat-icon>
+    </a>
+    <a mat-fab
+       [routerLink]="['../update']"
+       color="primary"
+       matTooltip="Editer le client"
+       matTooltipPosition="left">
+      <mat-icon>edit</mat-icon>
+    </a>
+  </div>
+
+  <h3>Détails</h3>
+  <div fxLayout="column"
+       fxLayoutGap="12px"
+       class="mat-elevation-z4 app-simple-table">
+
+    <mat-card class="mat-elevation-z0"
+              fxLayout
+              fxLayoutAlign="start stretch">
+      <div fxFlex
+           fxLayout
+           fxLayoutAlign="start center">
+        <span fxFlex="1 1 75px">Tel.</span>
+        <span fxFlex>{{customer.tel}}</span>
+        <span fxFlex="1 1 40px">
+          <a mat-icon-button color="primary"
+            href="tel:{{customer.tel}}"
+            matTooltip="Téléphoner"
+            matTooltipPosition="left">
+            <mat-icon>phone</mat-icon>
+          </a>
+        </span>
+      </div>
+    </mat-card>
+
+    <mat-card class="mat-elevation-z0"
+              fxLayout
+              fxLayoutAlign="start stretch">
+      <div fxFlex
+           fxLayout
+           fxLayoutAlign="start center">
+        <span fxFlex="1 1 75px">Email</span>
+        <span fxFlex>{{customer.email}}</span>
+        <span fxFlex="1 1 40px">
+          <a mat-icon-button color="primary"
+            href="mailto:{{customer.tel}}"
+            matTooltip="Envoyer un mail"
+            matTooltipPosition="left">
+            <mat-icon>email</mat-icon>
+          </a>
+        </span>
+      </div>
+    </mat-card>
+    <mat-card *ngIf="customer.address"
+              class="mat-elevation-z0"
+              fxLayout
+              fxLayoutAlign="start stretch">
+      <div fxFlex
+           fxLayout
+           fxLayoutAlign="start center">
+        <span fxFlex="1 1 75px">Adresse</span>
+        <span fxFlex>
+      {{customer.address.street}}, {{customer.address.zip}} - {{customer.address.city}}  
+      {{customer.address.region}}, {{customer.address.country}}  
+  </span>
+      </div>
+    </mat-card>
+    <mat-card *ngIf="customer.company"
+              class="mat-elevation-z0"
+              fxLayout
+              fxLayoutAlign="start stretch">
+      <div fxFlex
+           fxLayout
+           fxLayoutAlign="start center">
+        <span fxFlex="1 1 75px">Entreprise</span>
+        <span fxFlex>
+          {{customer.company}}
+        </span>
+      </div>
+    </mat-card>
+    <mat-expansion-panel class="mat-elevation-z0">
+      <mat-expansion-panel-header>
+        <mat-panel-title fxLayout
+                         fxLayoutAlign="start center">
+          <mat-icon color="primary">map</mat-icon>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <agm-map [style.height.px]="300"
+               [latitude]="customer.latlng?.lat"
+               [longitude]="customer.latlng?.lng"
+               [zoom]="12">
+        <agm-marker [latitude]="customer.latlng?.lat"
+                    [longitude]="customer.latlng?.lng"></agm-marker>
+      </agm-map>
+    </mat-expansion-panel>
+  </div>
+
+</div>
+
+
+
+<div fxLayout
+     fxLayoutAlign="start center"
+     fxLayoutGap="12px">
+  <h3>Animaux</h3>
+  <span fxFlex></span>
+  <a mat-mini-fab
+     [routerLink]="['../animal-lazy/animals', 'add']"
+     color="primary"
+     matTooltip="Ajouter un animal"
+     matTooltipPosition="left">
+    <mat-icon>add</mat-icon>
+  </a>
+</div>
+<div fxLayout
+     fxLayoutGap="12px"
+     fxLayoutAlign="start center">
+  <mat-form-field fxFlex>
+    <mat-select #fieldRef
+                placeholder="Champ à filtrer"
+                (change)="handleFilterTypeChange($event)">
+      <mat-option *ngFor="let field of filterableFields"
+                  [value]="field[0]">{{field[1]}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field fxFlex
+                  [fxShow]="dataSource?.filteredField$$?.value !== 'sex'">
+    <!-- Use fxShow cause we need ElementRef so element has to be inside the DOM -->
+    <input matInput
+           #filterRef
+           type="text"
+           placeholder="Filtre"
+           [disabled]="false">
+    <button mat-icon-button
+            matSuffix
+            #filterResetRef
+            [disabled]="filterRef.value === ''">
+             <mat-icon>clear</mat-icon>
+           </button>
+  </mat-form-field>
+  <mat-form-field fxFlex
+                  [fxHide]="dataSource?.filteredField$$?.value !== 'sex'">
+    <mat-select placeholder="Sexe"
+                (change)="dataSource.filter$$.next($event.value)">
+      <mat-option value="male">Mâle</mat-option>
+      <mat-option value="female">Femelle</mat-option>
+      <mat-option value="undefined">Indéfini</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<mat-table [dataSource]="dataSource"
+           matSort
+           matSortActive="name"
+           matSortDisableClear
+           matSortDirection="asc"
+           [trackBy]="trackBy"
+           class="mat-elevation-z4">
+
+  <ng-container cdkColumnDef="name">
+    <mat-header-cell *cdkHeaderCellDef
+                     mat-sort-header> Nom </mat-header-cell>
+    <mat-cell *cdkCellDef="let row"> {{row.name}} </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="birthday">
+    <mat-header-cell *cdkHeaderCellDef
+                     mat-sort-header> Date de naissance </mat-header-cell>
+    <mat-cell *cdkCellDef="let row"> {{row.birthday | date: 'shortDate'}} </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="sex">
+    <mat-header-cell *cdkHeaderCellDef
+                     mat-sort-header> Sexe </mat-header-cell>
+    <mat-cell *cdkCellDef="let row">
+      <ng-container [ngSwitch]="row.sex">
+        <mat-icon svgIcon="gender_male"
+                  *ngSwitchCase="'male'"></mat-icon>
+        <mat-icon svgIcon="gender_female"
+                  *ngSwitchCase="'female'"></mat-icon>
+        <mat-icon svgIcon="gender_undefined"
+                  *ngSwitchCase="'undefined'"></mat-icon>
+      </ng-container>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="breed">
+    <mat-header-cell *cdkHeaderCellDef
+                     mat-sort-header> Race </mat-header-cell>
+    <mat-cell *cdkCellDef="let row"> {{row.breed | unhash }} </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="details">
+    <mat-header-cell *cdkHeaderCellDef
+                     [style.maxWidth.px]="50"> Détails </mat-header-cell>
+    <mat-cell *cdkCellDef="let row"
+              [style.maxWidth.px]="50">
+      <a mat-icon-button
+         color="primary"
+         [routerLink]="['../animal-lazy/animal', row.$key]">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *cdkHeaderRowDef="fields"></mat-header-row>
+  <mat-row *cdkRowDef="let row; columns: fields;"></mat-row>
+</mat-table>

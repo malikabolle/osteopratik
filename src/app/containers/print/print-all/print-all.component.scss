@@ -1,0 +1,45 @@
+@import './../../../common/styles/mixins.scss';
+:host {
+    height: 100%;
+    @include default-width();
+    margin-top: 24px;
+    display: block;
+    box-sizing: border-box; // overflow: visible;
+    // table {
+    //     page-break-inside: auto;
+    // }
+    // tr {
+    //     page-break-inside: avoid;
+    //     page-break-after: auto;
+    // }
+    // thead {
+    //     display: table-header-group;
+    // }
+    // tfoot {
+    //     display: table-footer-group;
+    // }
+    table {
+        // width: 100%;
+        tr {
+            th,
+            td {
+                text-align: center;
+            }
+            th:first-child,
+            td:first-child {
+                text-align: left;
+            }
+            th:last-child,
+            td:last-child {
+                text-align: right;
+            }
+            td {
+                padding: 0;
+                min-width: 200px;
+            }
+        }
+    }
+    .space {
+        height: 24px;
+    }
+}

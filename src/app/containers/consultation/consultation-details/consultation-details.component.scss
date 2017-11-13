@@ -1,0 +1,21 @@
+@import './../../../common/styles/mixins.scss';
+:host {
+    @include default-width();
+    @include app-simple-table();
+    display: block;
+    box-sizing: border-box;
+    /deep/ .carousel-picture {
+        // height: auto;
+        // width: auto;
+        object-fit: contain;
+        margin: 6px; // cursor: pointer;
+        height: 400px;
+        with: auto;
+    }
+    mat-form-field {
+        width: 100%;
+    }
+    .buttonMargin {
+        margin-bottom: 24px;
+    }
+}

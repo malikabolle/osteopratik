@@ -1,0 +1,46 @@
+<div class="dark-theme">
+  <mat-toolbar color="primary">
+    <button *ngIf="(mediaQueryService.isMobile$ | async)"
+            mat-icon-button
+            (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>ostéopratik</h1>
+    <span fxFlex></span>
+    <mat-icon *ngIf="!isOnline()"
+              matTooltip="Hors-ligne"
+              matTooltipPosition="left"
+              class="blink">signal_wifi_off</mat-icon>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav fxLayout="column"
+                 #sidenav
+                 [mode]="(mediaQueryService.isMobile$ | async) ? 'over' :'side'"
+                 [opened]="!(mediaQueryService.isMobile$ | async)">
+      <app-sidenav-list [links]="links"
+                        (actions)="handleSidenavAction($event)"></app-sidenav-list>
+      <!-- <button mat-icon-button
+              class="sidenav-action"
+              color="primary"
+              (click)="toggleTheme()">
+        <mat-icon matTooltip="Alterner de thème"
+                  matTooltipPosition="right">invert_colors</mat-icon>
+      </button>
+      <button mat-icon-button
+              class="sidenav-action"
+              color="accent"
+              (click)="actions.emit('reload')">
+        <mat-icon matTooltip="Recharger l'application"
+                  matTooltipPosition="right">cached</mat-icon>
+      </button> -->
+    </mat-sidenav>
+
+    <main>
+      <div id="content-container">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </mat-sidenav-container>
+</div>

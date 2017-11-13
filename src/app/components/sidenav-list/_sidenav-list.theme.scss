@@ -1,0 +1,79 @@
+@import '~@angular/material/theming';
+@mixin app-sidenav-list-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    app-sidenav-list {
+        .mat-nav-list {
+            .mat-subheader {
+                color: map-get(map-get($theme, foreground), text);
+                text-decoration-color: mat-color($primary);
+            }
+            h2 {
+                &.mat-subheader {
+                    background-color: mat-color($primary, default);
+                    color: mat-color($primary, default-contrast);
+                }
+            }
+            h3 {
+                &.mat-subheader {
+                    border-top: 1px solid map-get(map-get($theme, foreground), divider);
+                    color: map-get(map-get($theme, foreground), secondary-text);
+                }
+            }
+            .mat-list-item {
+                h4 {
+                    &.mat-line {
+                        &:after {
+                            background-color: mat-color($primary);
+                        }
+                        &.external:after {
+                            background-color: mat-color($accent);
+                        }
+                    }
+                }
+                @media screen and (min-width: 1280px) {
+                    &:hover {
+                        mat-icon {
+                            color: mat-color($primary);
+                            &.external {
+                                color: mat-color($accent);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        a {
+            &.active {
+                .mat-list-item {
+                    background-color: map-get(map-get($theme, foreground), divider);
+                }
+            }
+        }
+    }
+}
+
+@mixin app-sidenav-list-typography($typography) {
+    app-sidenav-list {
+        .mat-nav-list {
+            .mat-list-item {
+                h2 {
+                    &.mat-subheader {
+                        @include mat-typography-level-to-styles($typography, subheading-1);
+                    }
+                }
+                h3 {
+                    &.mat-subheader {
+                        @include mat-typography-level-to-styles($typography, subheading-1);
+                    }
+                }
+                h4 {
+                    &.mat-line {
+                        @include mat-typography-level-to-styles($typography, subheading-1); // 
+                    }
+                }
+            }
+        }
+    }
+}

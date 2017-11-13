@@ -1,0 +1,25 @@
+{
+  "exclude": [
+    "node_modules",
+    "tsconfig.json",
+    "package.json",
+    "index.js"
+  ],
+  "compileOnSave": true,
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "lib": [
+      "es2016",
+      "es2017"
+    ],
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "target": "es5",
+    "module": "commonjs",
+    "baseUrl": "",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/"
+    ]
+  }
+}

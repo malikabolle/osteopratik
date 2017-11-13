@@ -1,0 +1,7 @@
+<h2>Sauvegarde</h2>
+<button mat-raised-button
+        #action
+        color="primary"
+        (click)="getRawBackup()">SAUVEGARDER LA BASE DE DONNEE</button>
+<app-loading *ngIf="action.disabled"
+             message="La procédure a été lancée. Vous pouvez quitter la page. Vous serez informé quand l'opération sera terminée"></app-loading>

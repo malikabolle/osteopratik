@@ -1,0 +1,73 @@
+{
+  "rules": {
+    // user light data (string, boolean, number)
+    // available offline
+    "users": {
+      "$uid": {
+        "access": {
+          ".read": "auth.uid === $uid || root.child('users').child(auth.uid).child('access').child('admin').val() === true",
+          "active": {
+            ".write": "root.child('users').child(auth.uid).child('access').child('admin').val() === true"
+          },
+          "admin": {
+            ".write": "root.child('users').child(auth.uid).child('access').child('admin').val() === true"
+          },
+          "valid": {
+            ".write": "auth.uid === $uid"
+          },
+        },
+        "breeds": {
+          ".read": "auth.uid === $uid",
+          ".write": "auth.uid === $uid"
+        },
+        "customers": {
+          ".read": "auth.uid === $uid",
+          ".write": "auth.uid === $uid"
+        },
+        "profile": {
+          ".read": "auth.uid === $uid || root.child('users').child(auth.uid).child('access').child('admin').val() === true",
+          ".write": "auth.uid === $uid"
+        },
+        "settings": {
+          ".read": "auth.uid === $uid || root.child('users').child(auth.uid).child('access').child('admin').val() === true",
+          ".write": "auth.uid === $uid"
+        },
+      }
+    },
+    // user heavy data (base64, ...)
+    // available online only
+    "data": {
+      "$uid": {
+        ".read": "auth.uid === $uid",
+        ".write": "auth.uid === $uid"
+      }
+    },
+    // shared data    
+    // available online only
+    "share": {
+      "$uid": {
+        ".write": "auth.uid === $uid",
+        "$access": {
+          ".read": "auth.uid === $uid || auth.uid === $access"
+        }
+      }
+    },
+    // let the target know that shared data is available    
+    // available online only
+    "share-access": {
+      "$access": {
+        ".read": "auth.uid === $access",
+        "$uid": {
+          ".write": "auth.uid === $uid || auth.uid === $access"
+        }
+      }
+    },
+    // public (active account only) directory
+    // writes are done via cloud functions on database / auth triggers    
+    // available online only 
+    "public": {
+      ".read": "true",
+      ".write": "false"
+    }
+  }
+}

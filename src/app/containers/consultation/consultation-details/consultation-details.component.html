@@ -1,0 +1,295 @@
+<ng-container *ngIf="consultation$ | async; let consultation">
+    <div fxLayout
+         fxLayoutAlign="start center"
+         fxLayoutGap="12px">
+        <h2>Consultation</h2>
+        <a mat-icon-button
+           [routerLink]="['../../../../']"
+           color="primary">
+            <mat-icon>arrow_back</mat-icon>
+        </a>
+        <span fxFlex></span>
+        <button *ngIf="consultation.status !== consultationStatus.consultationTransferred"
+                [disabled]="(invoice$ | async)?.status === invoiceStatus.invoiceDone || (invoice$ | async)?.status === invoiceStatus.invoiceEmitted || (invoice$ | async)?.status === invoiceStatus.invoicePaid "
+    
+                mat-fab
+                (click)="navigate(['../update'], { relativeTo: this._route})"
+                color="primary"
+                matTooltip="Editer la consultation"
+                matTooltipPosition="left">
+            <mat-icon>edit</mat-icon>
+        </button>
+    </div>
+    <h3>Détails</h3>
+    <div fxLayout="column"
+         fxLayoutGap="12px"
+         class="mat-elevation-z4 app-simple-table">
+
+        <mat-card class="mat-elevation-z0"
+                  fxLayout
+                  fxLayoutAlign="start stretch">
+            <div fxFlex
+                 fxLayout
+                 fxLayoutAlign="start center">
+                <span fxFlex="1 1 120px">Raison</span>
+                <span fxFlex>{{consultation.reason}}</span>
+            </div>
+        </mat-card>
+
+        <mat-card class="mat-elevation-z0"
+                  fxLayout
+                  fxLayoutAlign="start stretch">
+            <div fxFlex
+                 fxLayout
+                 fxLayoutAlign="start center">
+                <span fxFlex="1 1 120px">Statut</span>
+                <span fxFlex
+                      [ngSwitch]="consultation.status">
+                    <p *ngSwitchCase="consultationStatus.consultationDone">Terminée</p>
+                    <p *ngSwitchCase="consultationStatus.consultationProgrammed">Programmée</p>
+                    <p *ngSwitchCase="consultationStatus.consultationCanceled">Annulée</p>
+                    <p *ngSwitchCase="consultationStatus.consultationTransferred">Transférée</p>
+                </span>
+            </div>
+        </mat-card>
+
+        <mat-card class="mat-elevation-z0"
+                  fxLayout
+                  fxLayoutAlign="start stretch">
+            <div fxFlex
+                 fxLayout
+                 fxLayoutAlign="start center">
+                <span fxFlex="1 1 120px">Date</span>
+                <span fxFlex>
+                    {{consultation.date | date: 'shortDate'}} à {{consultation.time}}
+                </span>
+            </div>
+        </mat-card>
+
+
+        <mat-expansion-panel *ngIf="consultation.report"
+                             class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span>Compte rendu</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-container>
+                {{consultation.report }}
+            </ng-container>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel *ngIf="consultation.remarks"
+                             class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span>Remarques</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-container>
+                {{consultation.remarks}}
+            </ng-container>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel *ngIf="(pictures$ | async)?.length"
+                             class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <span>Images</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <ng-container>
+                <app-carousel [style.height.px]="450"
+                              [items]="pictures$ | async">
+                    <ng-template #itemTemplate
+                                 let-item>
+                        <img class="carousel-picture"
+                             [src]="item.base64"
+                             [alt]="item.name"
+                             (click)="handleImageClick($event)">
+                    </ng-template>
+                </app-carousel>
+            </ng-container>
+        </mat-expansion-panel>
+
+    </div>
+
+    <ng-container *ngIf="consultation.status !== consultationStatus.consultationTransferred">
+
+        <div fxLayout
+             fxLayoutAlign="start center"
+             fxLayoutGap="12px">
+            <h3>Facture</h3>
+            <span fxFlex></span>
+            <ng-container [ngSwitch]="(invoice$ | async)?.status">
+                <ng-container *ngSwitchCase="invoiceStatus.invoiceGenerated">
+                    <button mat-mini-fab
+                            color="primary"
+                            matTooltip="Supprimer la facture"
+                            matTooltipPosition="left"
+                            (click)="removeInvoice()">
+                        <mat-icon>clear</mat-icon>
+                    </button>
+                    <a mat-mini-fab
+                       color="primary"
+                       matTooltip="Compléter la facture"
+                       matTooltipPosition="left"
+                       [routerLink]="['../invoice-lazy', 'invoice', 'update']">
+                        <mat-icon>playlist_add_check</mat-icon>
+                    </a>
+                </ng-container>
+                <ng-container *ngSwitchCase="invoiceStatus.invoiceDone">
+                    <button mat-mini-fab
+                            color="primary"
+                            matTooltip="Imprimer la facture"
+                            matTooltipPosition="left"
+                            (click)="printInvoice()">
+                        <mat-icon>print</mat-icon>
+                    </button>
+                </ng-container>
+                <ng-container *ngSwitchCase="invoiceStatus.invoiceEmitted">
+                    <button mat-mini-fab
+                            color="primary"
+                            matTooltip="Imprimer la facture"
+                            matTooltipPosition="left"
+                            (click)="printInvoice()">
+                        <mat-icon>print</mat-icon>
+                    </button>
+                </ng-container>
+                <ng-container *ngSwitchCase="invoiceStatus.invoicePaid">
+                    <button mat-mini-fab
+                            color="primary"
+                            matTooltip="Imprimer la facture"
+                            matTooltipPosition="left"
+                            (click)="printInvoice()">
+                        <mat-icon>print</mat-icon>
+                    </button>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                    <button mat-mini-fab
+                            color="primary"
+                            matTooltip="Générer la facture"
+                            [disabled]="consultation.status === consultationStatus.consultationProgrammed"
+                            matTooltipPosition="left"
+                            (click)="addInvoice()">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </ng-container>
+            </ng-container>
+
+        </div>
+        <ng-container *ngIf="invoice$ | async; let invoice">
+            <div fxLayout="column"
+                 fxLayoutGap="12px"
+                 class="mat-elevation-z4 app-simple-table">
+
+                <mat-card class="mat-elevation-z0"
+                          fxLayout
+                          fxLayoutAlign="start stretch">
+                    <div fxFlex
+                         fxLayout
+                         fxLayoutAlign="start center">
+                        <span fxFlex="1 1 120px">Numéro de facture</span>
+                        <span fxFlex>{{invoice.invoiceNumber}}</span>
+                    </div>
+                </mat-card>
+
+                <mat-card class="mat-elevation-z0"
+                          fxLayout
+                          fxLayoutAlign="start stretch">
+                    <div fxFlex
+                         fxLayout
+                         fxLayoutAlign="start center">
+                        <span fxFlex="1 1 120px">Date d'émission</span>
+                        <span fxFlex>{{invoice.emissionDate | date: 'shortDate'}}</span>
+                    </div>
+                </mat-card>
+                <mat-card class="mat-elevation-z0"
+                          fxLayout
+                          fxLayoutAlign="start stretch">
+                    <div fxFlex
+                         fxLayout
+                         fxLayoutAlign="start center">
+                        <span fxFlex="1 1 120px">Montant</span>
+                        <span fxFlex>{{invoice.amount | currency: invoice.currency : true}}</span>
+                    </div>
+                </mat-card>
+                <mat-card class="mat-elevation-z0"
+                          fxLayout
+                          fxLayoutAlign="start stretch">
+                    <div fxFlex
+                         fxLayout
+                         fxLayoutAlign="start center">
+                        <span fxFlex="1 1 120px">Frais</span>
+                        <span fxFlex>{{invoice.fees | currency: invoice.currency : true}}</span>
+                    </div>
+                </mat-card>
+                <mat-card class="mat-elevation-z0"
+                          fxLayout
+                          fxLayoutAlign="start stretch">
+                    <div fxFlex
+                         fxLayout
+                         fxLayoutAlign="start center">
+                        <span fxFlex="1 1 120px">Rabais</span>
+                        <span fxFlex>{{invoice.discount | currency: invoice.currency : true}}</span>
+                    </div>
+                </mat-card>
+                <mat-card *ngIf="!!invoice.status"
+                          class="mat-elevation-z0"
+                          fxLayout
+                          fxLayoutAlign="start stretch">
+                    <div fxFlex
+                         fxLayout
+                         fxLayoutAlign="start center">
+                        <span fxFlex="1 1 120px">Statut</span>
+                        <ng-container *ngIf="invoice.status === invoiceStatus.invoiceGenerated; else selectStatusTemplate">
+                            <span>Genérée</span>
+                        </ng-container>
+                        <ng-template #selectStatusTemplate>
+                            <div [style.paddingRight.px]="18"
+                                 fxFlex="1 1 auto"
+                                 [fxLayout]="selectStatusRef.value === invoiceStatus.invoicePaid ? 'column' : 'row'"
+                                 fxLayoutAlign="end center"
+                                 fxLayoutAlign.xs="start center"
+                                 fxLayoutGap="24px">
+                                <mat-form-field fxFlex="1 1 auto">
+                                    <mat-select [ngModel]="invoice.status"
+                                                #selectStatusRef>
+                                        <mat-option [value]="invoiceStatus.invoiceDone">Validée</mat-option>
+                                        <mat-option [value]="invoiceStatus.invoiceEmitted">Emise</mat-option>
+                                        <mat-option [value]="invoiceStatus.invoicePaid">Payée</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <ng-container *ngIf="selectStatusRef.value === invoiceStatus.invoicePaid; else baseTemplateRef">
+                                    <mat-form-field>
+                                        <textarea placeholder="Commentaires"
+                                                  matInput
+                                                  cols="30"
+                                                  rows="10"
+                                                  [(ngModel)]="comment">
+                                        asdasda
+                                    </textarea>
+                                    </mat-form-field>
+                                    <button class="buttonMargin"
+                                            fxFlex="1 1 auto"
+                                            mat-raised-button
+                                            color="primary"
+                                            (click)="updateInvoice({status: selectStatusRef.selected.value, comment: comment})">SAUVEGARDER</button>
+                                </ng-container>
+                                <ng-template #baseTemplateRef>
+                                    <button fxFlex="1 1 auto"
+                                            mat-icon-button
+                                            color="primary"
+                                            (click)="updateInvoice({status: selectStatusRef.selected.value})">
+                                        <mat-icon>save</mat-icon>
+                                    </button>
+                                </ng-template>
+                            </div>
+                        </ng-template>
+                    </div>
+                </mat-card>
+
+            </div>
+        </ng-container>
+    </ng-container>
+</ng-container>

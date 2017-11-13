@@ -1,0 +1,160 @@
+<h2>Paramètres</h2>
+<h3>Finances</h3>
+<mat-card>
+  <mat-card-subtitle>
+    <h4>Factures</h4>
+  </mat-card-subtitle>
+
+  <mat-card-content>
+    <form fxLayout
+          [formGroup]="localeForm"
+          (ngSubmit)="updateSettings(localeForm.value)"
+          fxLayoutGap="16px"
+          fxLayout="column">
+
+      <div fxFlex="1 1 auto"
+           fxLayout="row"
+           fxLayout.xs="column"
+           fxLayoutGap="12px"
+           fxLayoutGap.xs="16px"
+           fxLayoutAlign="start center">
+        <mat-form-field fxFlex="1 1 auto">
+          <input matInput
+                 type="number"
+                 formControlName="vat"
+                 placeholder="TVA">
+          <span matSuffix>%</span>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="1 1 auto">
+          <input matInput
+                 type="number"
+                 formControlName="invoiceNumber"
+                 placeholder="Numéro de facture courant">
+          <mat-hint align="start">Ne peut pas être modifié.</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="1 1 auto"
+           fxLayout="row"
+           fxLayout.xs="column"
+           fxLayoutGap="12px"
+           fxLayoutGap.xs="16px"
+           fxLayoutAlign="start center">
+        <mat-form-field fxFlex="1 1 auto">
+          <mat-select placeholder="Devise"
+                      (change)="handleCurrencyChange($event)"
+                      formControlName="currency">
+            <mat-option *ngFor="let c of currencies"
+                        [value]="c">
+              {{ c | uppercase }}
+            </mat-option>
+          </mat-select>
+          <mat-hint align="start">Ne peut pas être modifié.</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="1 1 auto"
+                        [fxShow]="isCurrencyEUR">
+          <input matInput
+                 type="text"
+                 formControlName="siret"
+                 placeholder="Numéro siret">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout
+           fxLayoutAlign="end center"
+           fxLayoutAlign.xs="center center">
+        <button fxFlex.xs="1 1 100%"
+                fxFlex="0 0 auto"
+                mat-raised-button
+                color="primary"
+                [disabled]="localeForm.invalid || localeForm.pristine"
+                type="submit">SAUVEGARDER</button>
+      </div>
+
+
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card>
+  <mat-card-subtitle>
+    <h4>Paiement</h4>
+  </mat-card-subtitle>
+
+  <mat-card-content>
+    <form fxLayout
+          [formGroup]="billingForm"
+          (ngSubmit)="updateSettings(billingForm.value)"
+          fxLayoutGap="16px"
+          fxLayout="column">
+
+      <div fxFlex="1 1 auto"
+           fxLayout="row"
+           fxLayout.xs="column"
+           fxLayoutGap="12px"
+           fxLayoutGap.xs="16px"
+           fxLayoutAlign="start center">
+        <mat-form-field>
+          <input matInput
+                 type="string"
+                 formControlName="iban"
+                 placeholder="IBAN">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+                 type="string"
+                 formControlName="swift"
+                 placeholder="BIC / SWIFT">
+          <mat-hint>SEPA Uniquement</mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout
+           fxLayoutAlign="end center"
+           fxLayoutAlign.xs="center center">
+        <button fxFlex.xs="1 1 100%"
+                fxFlex="0 0 auto"
+                mat-raised-button
+                color="primary"
+                [disabled]="billingForm.invalid || billingForm.pristine"
+                type="submit">SAUVEGARDER</button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-subtitle>
+    <h4>Personnaliser l'en-tête</h4>
+  </mat-card-subtitle>
+
+  <mat-card-content>
+    <app-markdown-editor (htmlChange)="onHtmlChange($event)"
+                         #editorRef
+                         [template]="(invoiceTemplate$ | async)"
+                         [logo]="(invoiceLogo$ | async)"> </app-markdown-editor>
+
+    <mat-card>
+      <mat-card-subtitle>
+        <h5>Aperçu</h5>
+      </mat-card-subtitle>
+      <mat-card-content>
+        <div class="render"
+             [innerHTML]="html"></div>
+      </mat-card-content>
+    </mat-card>
+    <div fxLayout
+         fxLayoutAlign="end center"
+         fxLayoutAlign.xs="center center">
+      <button fxFlex.xs="1 1 100%"
+              fxFlex="0 0 auto"
+              mat-raised-button
+              color="primary"
+              (click)="updateInvoiceTemplate(editorRef.template, editorRef.logo)">SAUVEGARDER</button>
+    </div>
+
+  </mat-card-content>
+</mat-card>

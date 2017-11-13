@@ -1,0 +1,44 @@
+@import '~@angular/material/theming';
+@import './../../_app.theme.scss';
+@import './../../components/sidenav-list/_sidenav-list.theme.scss';
+@import './../../containers/customer/customer-details/_app-simple-table.theme.scss';
+@import './../../components/carousel/_carousel-theme.scss';
+@include mat-core();
+// theme typography
+$typography: mat-typography-config( $font-family: 'Roboto Condensed', $display-4: mat-typography-level(48px, 48px, 300), $display-3: mat-typography-level(36px, 36px, 300), $display-2: mat-typography-level(24px, 24px, 300), $display-1: mat-typography-level(20px, 20px, 300), $title: mat-typography-level(30px, 40px, 300), $subheading-2: mat-typography-level(16px, 16px, 300), $body-1: mat-typography-level(14px, 14px, 300), $body-2: mat-typography-level(14px, 14px, 400), $caption: mat-typography-level(12px, 12px, 300), $button: mat-typography-level(14px, 14px, 400));
+$typographyMobile: mat-typography-config( $font-family: 'Roboto Condensed', $display-4: mat-typography-level(36px, 36px, 300), $display-3: mat-typography-level(24px, 24px, 300), $display-2: mat-typography-level(20px, 20px, 300), $display-1: mat-typography-level(16px, 16px, 300), $title: mat-typography-level(30px, 40px, 300), $subheading-2: mat-typography-level(16px, 16px, 300), $body-1: mat-typography-level(12px, 12px, 300), $body-2: mat-typography-level(12px, 12px, 400), $caption: mat-typography-level(10px, 10px, 300), $button: mat-typography-level(14px, 14px, 400));
+@media all and (max-width: 599px) {
+    @include app-typography($typographyMobile);
+    @include angular-material-typography($typographyMobile);
+}
+
+@media all and (min-width: 600px) {
+    @include app-typography($typography);
+    @include angular-material-typography($typography);
+}
+
+@include app-sidenav-list-typography($typography);
+@include app-simple-table-typography($typography);
+$dark-primary: mat-palette($mat-orange, 300, 200, 400);
+$dark-accent: mat-palette($mat-deep-purple, A200, A100, A200);
+$dark-warn: mat-palette($mat-red, 500);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+.dark-theme {
+    @include angular-material-theme($dark-theme);
+    @include app-theme($dark-theme);
+    @include app-sidenav-list-theme($dark-theme);
+    @include app-simple-table-theme($dark-theme);
+    @include app-carousel-theme($dark-theme);
+}
+
+$primary: mat-palette($mat-indigo, 500, 300, 700);
+$accent: mat-palette($mat-pink, A200, A100, A400);
+$warn: mat-palette($mat-red, 500);
+$theme: mat-light-theme($primary, $accent, $warn);
+.light-theme {
+    @include angular-material-theme($theme);
+    @include app-theme($theme);
+    @include app-sidenav-list-theme($theme);
+    @include app-simple-table-theme($theme);
+    @include app-carousel-theme($theme);
+}

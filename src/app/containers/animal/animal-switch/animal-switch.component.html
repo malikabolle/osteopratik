@@ -1,0 +1,54 @@
+<h2>Echanger un animal</h2>
+<!-- <h3 *ngIf="customer$ | async; let customer">{{customer.firstName}} {{customer.lastName}}</h3> -->
+<!-- <h4 *ngIf="animal$ | async; let animal">{{animal.name}}</h4> -->
+<mat-card>
+  <mat-card-content>
+
+    <form [formGroup]="form"
+          (ngSubmit)="transferAnimal()"
+          fxLayoutGap="16px"
+          fxLayout="column">
+
+      <div fxFlex="1 1 auto"
+           fxLayout="row"
+           fxLayout.xs="column"
+           fxLayoutGap="12px"
+           fxLayoutGap.xs="16px"
+           fxLayoutAlign="start center">
+        <mat-form-field fxFlex="1 1 auto">
+          <mat-select formControlName="customerTarget"
+                      placeholder="Client cible"
+                      (change)="selectCustomer($event)">
+            <mat-option *ngFor="let customer of customers$ | async"
+                        [value]="customer">
+              {{customer.firstName}} {{customer.lastName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row"
+           fxLayoutAlign="end center"
+           fxLayoutAlign.xs="start center"
+           fxLayoutGap="12px">
+
+        <a fxFlex.xs="1 1 auto"
+           fxFlex="0 0 auto"
+           mat-raised-button
+           color="accent"
+           [routerLink]="['../read']">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </a>
+
+        <button #action
+                fxFlex.xs="1 1 100%"
+                fxFlex="0 0 auto"
+                mat-raised-button
+                color="primary"
+                [disabled]="form.invalid || form.pristine"
+                type="submit">ECHANGER</button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

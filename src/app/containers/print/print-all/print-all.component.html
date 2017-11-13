@@ -1,0 +1,45 @@
+<ng-container *ngIf="accounting$ | async; let accounting; else loadingTemplate">
+
+  <!-- <div class="render"
+       [innerHTML]="html$ | async"></div> -->
+
+  <h1>Comptabilité annuelle</h1>
+  <hr>
+  <div class="space"> </div>
+
+  <ng-container *ngIf="profile$ | async; let profile">
+    <div class="address">
+      <div>{{profile.firstName}} {{profile.lastName}}</div>
+      <div>{{profile.address.street}}</div>
+      <div>{{profile.address.zip}} - {{profile.address.city}}</div>
+      <div>{{profile.address.region}} - {{profile.address.country}}</div>
+      <div>{{profile.tel}}</div>
+      <div>{{profile.email}}</div>
+    </div>
+  </ng-container>
+
+  <div class="space"> </div>
+
+  <table>
+    <tr>
+      <th>Numéro de facture</th>
+      <th>Client</th>
+      <th>Date d'émission</th>
+      <th>Montant</th>
+    </tr>
+    <tr *ngFor="let invoice of accounting.invoices">
+      <td>{{invoice.invoiceNumber}}</td>
+      <td>{{invoice.name}}</td>
+      <td>{{invoice.emissionDate | date: 'shortDate'}}</td>
+      <th>{{invoice.total | currency: currency : true : '3.2-2'}}</th>
+    </tr>
+    <tr>
+      <th colspan="3">Total</th>
+      <th>{{accounting.sum | currency: currency : true : '3.2-2'}}</th>
+    </tr>
+  </table>
+
+</ng-container>
+<ng-template #loadingTemplate>
+  <app-loading></app-loading>
+</ng-template>

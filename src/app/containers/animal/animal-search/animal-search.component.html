@@ -1,0 +1,94 @@
+<h2>Rechercher un animal</h2>
+<div fxLayout
+     fxLayoutGap="12px"
+     fxLayoutAlign="start center">
+  <mat-form-field fxFlex="40%">
+    <mat-select #fieldRef
+                placeholder="Champ à filtrer"
+                (change)="handleFilterTypeChange($event)">
+      <mat-option *ngFor="let field of filterableFields"
+                  [value]="field[0]">{{field[1]}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field fxFlex="60%">
+    <input matInput
+           #filterRef
+           type="text"
+           placeholder="Filtre"
+           [disabled]="!fieldRef.selected">
+    <button mat-icon-button
+            matSuffix
+            #filterResetRef
+            [disabled]="filterRef.value === ''">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-form-field>
+
+</div>
+
+<div class="mat-elevation-z4">
+
+  <mat-table [dataSource]="dataSource"
+             matSort
+             matSortActive="name"
+             matSortDisableClear
+             matSortDirection="asc">
+
+    <ng-container cdkColumnDef="name">
+      <mat-header-cell *cdkHeaderCellDef
+                       mat-sort-header> Nom </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"> {{row.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="breed">
+      <mat-header-cell *cdkHeaderCellDef
+                       mat-sort-header> Race </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"> {{row.breed}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="sex">
+      <mat-header-cell *cdkHeaderCellDef
+                       mat-sort-header> Sexe </mat-header-cell>
+      <mat-cell *cdkCellDef="let row">
+        <ng-container [ngSwitch]="row.sex">
+          <mat-icon svgIcon="gender_male"
+                    *ngSwitchCase="'male'"></mat-icon>
+          <mat-icon svgIcon="gender_female"
+                    *ngSwitchCase="'female'"></mat-icon>
+          <mat-icon svgIcon="gender_undefined"
+                    *ngSwitchCase="'undefined'"></mat-icon>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="birthday">
+      <mat-header-cell *cdkHeaderCellDef
+                       mat-sort-header> Date de naissance </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"> {{row.birthday | date: 'shortDate'}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="details">
+      <mat-header-cell *cdkHeaderCellDef
+                       [style.maxWidth.px]="50"
+                       [style.minWidth.px]="50"> Détails </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"
+                [style.maxWidth.px]="50"
+                [style.minWidth.px]="50">
+        <a mat-icon-button
+           color="primary"
+           [routerLink]="['../../customer-lazy' , 'customer', row.customerKey, 'animal-lazy', 'animal', row.$key]">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </a>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="fields"></mat-header-row>
+    <mat-row *cdkRowDef="let row; columns: fields;"></mat-row>
+  </mat-table>
+  <mat-paginator [length]="dataSource.length$$ | async"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]"
+                 class="mat-elevation-z0">
+  </mat-paginator>
+</div>

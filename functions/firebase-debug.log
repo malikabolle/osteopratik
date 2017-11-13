@@ -1,0 +1,38 @@
+[debug] [2017-10-12T15:29:07.304Z] ----------------------------------------------------------------------
+[debug] [2017-10-12T15:29:07.306Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Thibault\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve --only functions
+[debug] [2017-10-12T15:29:07.306Z] CLI Version:   3.12.0
+[debug] [2017-10-12T15:29:07.306Z] Platform:      win32
+[debug] [2017-10-12T15:29:07.306Z] Node Version:  v8.1.4
+[debug] [2017-10-12T15:29:07.306Z] Time:          Thu Oct 12 2017 17:29:07 GMT+0200 (W. Europe Daylight Time)
+[debug] [2017-10-12T15:29:07.306Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-12T15:29:07.314Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-12T15:29:07.315Z] > authorizing via signed-in user
+[debug] [2017-10-12T15:29:07.316Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-10-12T15:29:07.316Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/7kLaLEo7og1-xtQYnP9UuhrWcQBYzJ9vmt_W1kiMRSU',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Thu Oct 12 2017 17:29:07 GMT+0200 (W. Europe Daylight Time)
+[debug] [2017-10-12T15:29:07.430Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-12T15:29:07.440Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/osteopathie-animaliere  
+ Thu Oct 12 2017 17:29:07 GMT+0200 (W. Europe Daylight Time)
+[debug] [2017-10-12T15:29:08.119Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-12T15:29:08.120Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/osteopathie-animaliere/tokens  
+ Thu Oct 12 2017 17:29:08 GMT+0200 (W. Europe Daylight Time)
+[debug] [2017-10-12T15:29:08.765Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Thibault\Desktop\osteopratik'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2017-10-12T15:29:08.973Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/osteopathie-animaliere  
+ Thu Oct 12 2017 17:29:08 GMT+0200 (W. Europe Daylight Time)
+[debug] [2017-10-12T15:29:08.973Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/osteopathie-animaliere/apiKeys  
+ Thu Oct 12 2017 17:29:08 GMT+0200 (W. Europe Daylight Time)
+[debug] [2017-10-12T15:29:09.836Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-12T15:29:09.861Z] <<< HTTP RESPONSE 200
+[info] +  functions: annualBreedsStatistics: http://localhost:5000/osteopathie-animaliere/us-central1/annualBreedsStatistics
+[info] +  functions: annualRevenueStatistics: http://localhost:5000/osteopathie-animaliere/us-central1/annualRevenueStatistics
+[info] +  functions: backup: http://localhost:5000/osteopathie-animaliere/us-central1/backup
+[info] +  functions: accounting: http://localhost:5000/osteopathie-animaliere/us-central1/accounting

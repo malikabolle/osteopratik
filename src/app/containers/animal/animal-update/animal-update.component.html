@@ -1,0 +1,91 @@
+<h2>éditer un animal</h2>
+<h3 *ngIf="customer$ | async; let customer">{{customer.firstName}} {{customer.lastName}}</h3>
+<h4 *ngIf="animal$ | async; let animal">{{animal.name}}</h4>
+<mat-card>
+  <mat-card-content>
+    <form [formGroup]="form"
+          (ngSubmit)="updateAnimal(form.value)"
+          fxLayoutGap="16px"
+          fxLayout="column">
+
+      <div fxFlex="1 1 auto"
+           fxLayout="row"
+           fxLayout.xs="column"
+           fxLayoutGap="12px"
+           fxLayoutGap.xs="16px"
+           fxLayoutAlign="start center">
+        <mat-form-field fxFlex="1 1 auto">
+          <input type="text"
+                 matInput
+                 placeholder="Nom"
+                 formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field fxFlex="1 1 auto">
+          <input matInput
+                 [matDatepicker]="birthdayPickerRef"
+                 placeholder="Date de naissance"
+                 formControlName="birthday">
+          <mat-datepicker-toggle matSuffix
+                                 [for]="birthdayPickerRef"></mat-datepicker-toggle>
+          <mat-datepicker touchUi="true"
+                          #birthdayPickerRef></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div fxFlex="1 1 auto"
+           fxLayout="row"
+           fxLayout.xs="column"
+           fxLayoutGap="12px"
+           fxLayoutGap.xs="16px"
+           fxLayoutAlign="start center">
+        <mat-form-field fxFlex="1 1 50%"
+                        fxFlex.xs="1 1 auto">
+          <mat-select placeholder="Sexe"
+                      formControlName="sex">
+            <mat-option value="male">Mâle</mat-option>
+            <mat-option value="female">Femelle</mat-option>
+            <mat-option value="undefined">Indéfini</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="1 1 50%"
+                        fxFlex.xs="1 1 auto">
+          <mat-select placeholder="Race"
+                      formControlName="breedKey">
+            <mat-option *ngFor="let breed of breeds$ | async"
+                        [value]="breed.$key">{{breed.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field fxFlex="1 1 auto">
+        <textarea matInput
+                  rows="5"
+                  placeholder="Antécédents"
+                  formControlName="background"></textarea>
+      </mat-form-field>
+
+
+      <div fxLayout="row"
+           fxLayoutAlign="end center"
+           fxLayoutAlign.xs="start center"
+           fxLayoutGap="12px">
+        <a fxFlex.xs="1 1 auto"
+           fxFlex="0 0 auto"
+           mat-raised-button
+           color="accent"
+           [routerLink]="['../']">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </a>
+
+        <button fxFlex.xs="1 1 auto"
+                fxFlex="0 0 auto"
+                mat-raised-button
+                color="primary"
+                [disabled]="form.invalid || form.pristine"
+                type="submit">SAUVEGARDER</button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,129 @@
+<h2>éditer une consultation</h2>
+<h3 *ngIf="customer$ | async; let customer">{{customer.firstName}} {{customer.lastName}}</h3>
+<h4 *ngIf="animal$ | async; let animal">{{animal.name}}</h4>
+<mat-card>
+  <mat-card-subtitle>Images</mat-card-subtitle>
+
+  <div fxLayout="row wrap"
+       fxLayoutAlign="space-around center">
+    <ng-container *ngFor="let picture of pictures$ | async">
+      <div>
+        <img class="picture"
+             fxFlex="1 1 auto"
+             [src]="picture.base64"
+             [alt]="picture.name">
+
+        <button mat-icon-button
+                [style.position]="'absolute'"
+                [style.margin]="'6px 0 0 6px'"
+                color="accent"
+                (click)="removePicture(picture)">
+          <mat-icon>clear</mat-icon>
+        </button>
+
+      </div>
+    </ng-container>
+  </div>
+
+  <div fxLayout
+       fxLayoutAlign="end center"
+       [style.height.px]="60">
+    <button mat-mini-fab
+            color="primary"
+            (click)="addPictureControl()"
+            matTooltip="Ajouter une image"
+            matTooltipPosition="left">
+          <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <app-dynamic-form #dynamicFormRef
+                    [config]="config">
+  </app-dynamic-form>
+
+  <form [formGroup]="form"
+        (ngSubmit)="updateConsultation(form.value)"
+        fxLayoutGap="16px"
+        fxLayout="column">
+
+    <mat-form-field>
+      <input type="text"
+             matInput
+             placeholder="Raison"
+             formControlName="reason">
+    </mat-form-field>
+
+
+    <div fxFlex="1 1 auto"
+         fxLayout="row"
+         fxLayout.xs="column"
+         fxLayoutGap="12px"
+         fxLayoutGap.xs="16px"
+         fxLayoutAlign="start center">
+      <mat-form-field fxFlex="1 1 auto">
+        <input matInput
+               [matDatepicker]="datePickerRef"
+               placeholder="Date"
+               formControlName="date">
+        <mat-datepicker-toggle matSuffix
+                               [for]="datePickerRef"></mat-datepicker-toggle>
+        <mat-datepicker touchUi="true"
+                        #datePickerRef
+                        startView="month"
+                        [startAt]="startDate"></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="1 1 auto">
+        <input type="time"
+               matInput
+               placeholder="Heure"
+               formControlName="time">
+      </mat-form-field>
+
+    </div>
+    <mat-form-field fxFlex="1 1 auto">
+      <mat-select placeholder="Statut"
+                  formControlName="status">
+        <mat-option [value]="consultationStatus.consultationCanceled">Annulée</mat-option>
+        <mat-option [value]="consultationStatus.consultationDone">Terminée</mat-option>
+        <mat-option [value]="consultationStatus.consultationProgrammed">Programmée</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput
+                rows="5"
+                placeholder="Compte rendu"
+                formControlName="report">
+        </textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+      <textarea matInput
+                rows="5"
+                placeholder="Remarques"
+                formControlName="remarks">
+      </textarea>
+    </mat-form-field>
+
+    <div fxLayout="row"
+         fxLayoutAlign="end center"
+         fxLayoutAlign.xs="start center"
+         fxLayoutGap="12px">
+      <a fxFlex.xs="1 1 auto"
+         fxFlex="0 0 auto"
+         mat-raised-button
+         color="accent"
+         [routerLink]="['../read']">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </a>
+
+      <button fxFlex.xs="1 1 auto"
+              fxFlex="0 0 auto"
+              mat-raised-button
+              color="primary"
+              [disabled]="form.invalid"
+              type="submit">SAUVEGARDER</button>
+    </div>
+  </form>
+</mat-card>

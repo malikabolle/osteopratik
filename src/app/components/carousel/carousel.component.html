@@ -1,0 +1,64 @@
+<button id="previous"
+        mat-icon-button
+        [color]="color"
+        (click)="previous()"
+        [disabled]="isAnimationRunning">
+    <mat-icon>keyboard_arrow_left</mat-icon>
+  </button>
+
+<button id="next"
+        mat-icon-button
+        [color]="color"
+        (click)="next()"
+        [disabled]="isAnimationRunning">
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+
+<section id="selectors">
+  <ng-template ngFor
+               let-item
+               let-index="index"
+               [ngForOf]="items">
+
+    <ng-template [ngTemplateOutlet]="selectorTemplate"
+                 [ngOutletContext]="{ $implicit : item, index: index, items: items }">
+    </ng-template>
+
+    <button mat-mini-fab
+            #selector
+            color="accent"
+            [attr.color]="selectedIndex === index ? color : ''"
+            class="selector"
+            (click)="selected = selected === item ? selected : item"
+            [class.selected]="selectedIndex === index"
+            [disabled]="isAnimationRunning"
+            *ngIf="!selectorTemplate">
+      </button>
+
+  </ng-template>
+</section>
+
+<section id="item"
+         fxLayout="row"
+         fxLayoutAlign="center center">
+  <ng-template ngFor
+               let-item
+               let-index="index"
+               [ngForOf]="items">
+
+    <section *ngIf="selectedIndex === index"
+             [@slide]="direction"
+             (@slide.start)="isAnimationRunning = true"
+             (@slide.done)="isAnimationRunning = false"
+             class="animated-item"
+             fxLayout="row"
+             fxLayoutAlign="center center">
+
+      <ng-template [ngTemplateOutlet]="itemTemplate"
+                   [ngOutletContext]="{ $implicit : item, index: index, items: items }">
+      </ng-template>
+
+    </section>
+
+  </ng-template>
+</section>

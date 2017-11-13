@@ -1,0 +1,54 @@
+@import './../../../common/styles/mixins.scss';
+:host {
+    body {
+        height: auto;
+    }
+    @include default-width(); // margin-top: 24px;
+    // display: block;
+    // box-sizing: border-box;
+    table {
+        tr {
+            td {
+                padding: 0;
+                min-width: 100px;
+            }
+        }
+    }
+    .render /deep/ {
+        h1,
+        h2,
+        h3,
+        h4,
+        p {
+            margin: 0 0 12px 0;
+            white-space: pre;
+        }
+        .flex-container {
+            display: flex;
+            align-items: center;
+            .fill {
+                flex: 1 1 auto;
+                width: 100%;
+            }
+            p {
+                flex: 1 1 auto;
+            }
+        }
+        .space {
+            height: 1em;
+        }
+        .address {
+            min-width: 200px;
+        }
+        img {
+            display: block;
+            height: 100px;
+            max-width: 200px;
+            object-fit: scale-down;
+        }
+        hr {
+            border: none;
+            border-bottom: solid 1px #212121;
+        }
+    }
+}

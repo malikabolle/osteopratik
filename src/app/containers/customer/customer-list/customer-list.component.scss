@@ -1,0 +1,12 @@
+@import './../../../common/styles/mixins.scss';
+:host {
+    @include default-width();
+    display: block;
+    box-sizing: border-box;
+    mat-paginator {
+        box-shadow: unset;
+    }
+    mat-form-field {
+        width: 100%;
+    }
+}

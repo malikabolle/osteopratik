@@ -1,0 +1,48 @@
+<mat-nav-list>
+  <ng-template ngFor
+               [ngForOf]="links"
+               let-link>
+    <h2 mat-subheader
+        *ngIf="link.isHeader">{{link.label | uppercase}}</h2>
+
+    <h3 mat-subheader
+        *ngIf="link.isSubHeader">{{link.label | uppercase}}</h3>
+
+    <a *ngIf="!(link.isSubHeader || link.isHeader || link.isExternal || link.isAction)"
+       [routerLink]="link.path"
+       (click)="onClick($event)"
+       routerLinkActive="active"
+       [routerLinkActiveOptions]="{exact: true}">
+      <mat-list-item>
+        <mat-icon mat-list-icon
+                  *ngIf="link.icon">{{link.icon}}</mat-icon>
+        <h4 mat-line>{{link.label | uppercase}}</h4>
+      </mat-list-item>
+    </a>
+
+    <a *ngIf="link.isExternal"
+       target="_blank"
+       rel="noopener"
+       [href]="link?.path">
+      <mat-list-item>
+        <mat-icon mat-list-icon
+                  class="external"
+                  *ngIf="link.icon">{{link.icon}}</mat-icon>
+        <h4 mat-line
+            class="external">{{link.label | uppercase}}</h4>
+      </mat-list-item>
+    </a>
+
+    <mat-list-item *ngIf="link.isAction"
+                   (click)="actions.emit(link.path)">
+      <!-- <button mat-icon-button> -->
+      <mat-icon mat-list-icon
+                class="external"
+                *ngIf="link.icon">{{link.icon}}</mat-icon>
+      <!-- </button> -->
+      <h4 mat-line
+          class="external">{{link.label | uppercase}}</h4>
+    </mat-list-item>
+
+  </ng-template>
+</mat-nav-list>

@@ -1,0 +1,58 @@
+@import '~@angular/material/theming';
+:host {
+    display: block;
+    box-sizing: border-box;
+    .mat-nav-list {
+        a,
+        button {
+            display: block;
+        }
+        h3 {
+            &.mat-subheader {
+                text-decoration: underline;
+            }
+        }
+        .mat-subheader {
+            height: auto;
+            text-align: center !important;
+            display: block;
+        }
+        .mat-list-item {
+            cursor: pointer;
+            transition: all 400ms $ease-in-out-curve-function;
+            .mat-icon {
+                transition: all 200ms $ease-in-out-curve-function;
+            }
+            h4 {
+                &.mat-line {
+                    display: inline !important;
+                    &:after {
+                        content: "";
+                        width: 3px;
+                        height: 100%;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        visibility: hidden;
+                        transform: scaleY(0);
+                        transition: all 300ms $mat-fast-out-slow-in-timing-function;
+                    }
+                }
+            }
+            @media screen and (min-width: 1280px) {
+                &:hover {
+                    h4 {
+                        &:after {
+                            visibility: visible;
+                            transform: scaleY(1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    a {
+        outline: none;
+        text-decoration: none;
+    }
+}

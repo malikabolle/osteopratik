@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+      <meta charset="utf-8">
+
+      <title>OSTEOPRATIK</title>
+
+      <base href="/">
+
+      <meta name="viewport"
+            content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
+      <link rel="icon"
+            type="image/x-icon"
+            href="favicon.ico">
+
+      <link rel="manifest"
+            href="assets/manifest.json">
+
+      <link rel="apple-touch-icon"
+            sizes="180x180"
+            href="assets/app-icons/apple-touch-icon.png">
+
+      <link rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="assets/app-icons/favicon-32x32.png">
+
+      <link rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="assets/app-icons/favicon-16x16.png">
+
+      <link rel="mask-icon"
+            href="assets/app-icons/safari-pinned-tab.svg"
+            color="#5bbad5">
+
+      <meta name="theme-color"
+            content="#FFB74D">
+
+      <!-- credits: http://dev.gojko.net/web/2015/09/19/material-design-progress-pure-css.html  -->
+      <style>
+            body {
+                  margin: 0;
+                  background: #212121;
+            }
+
+            .progress-line,
+            .progress-line:before {
+                  height: 5px;
+                  width: 100%;
+                  margin: 0;
+            }
+
+            .progress-line {
+                  background-color: #212121;
+                  display: -webkit-flex;
+                  display: flex;
+            }
+
+            .progress-line:before {
+                  background-color: #FFB74D;
+                  content: '';
+                  -webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                  animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            }
+
+            @-webkit-keyframes running-progress {
+                  0% {
+                        margin-left: 0px;
+                        margin-right: 100%;
+                  }
+                  50% {
+                        margin-left: 25%;
+                        margin-right: 0%;
+                  }
+                  100% {
+                        margin-left: 100%;
+                        margin-right: 0;
+                  }
+            }
+
+            @keyframes running-progress {
+                  0% {
+                        margin-left: 0px;
+                        margin-right: 100%;
+                  }
+                  50% {
+                        margin-left: 25%;
+                        margin-right: 0%;
+                  }
+                  100% {
+                        margin-left: 100%;
+                        margin-right: 0;
+                  }
+            }
+      </style>
+</head>
+
+<body class="dark-theme">
+      <app-root>
+            <div class="progress-line-container">
+                  <div class="progress-line"></div>
+            </div>
+      </app-root>
+      <!-- 
+            Conditionnaly load the app-cache via an iframe if service-worker isn't available in the browser
+       -->
+      <iframe id="app-cache"
+              src="./assets/_app-cache-placeholder.html"
+              style="visibility: none; height: 0; width: 0;"
+              frameborder="0"></iframe>
+
+      <script>
+            if (!('serviceWorker' in navigator)) {
+                  console.log('service-worker not available');
+                  if ('applicationCache' in window) {
+                        document.body
+                              .querySelector('#app-cache')
+                              .setAttribute('src', './assets/_app-cache-loader.html');
+
+                        window.applicationCache
+                              .addEventListener('updateready', function (event) {
+                                    if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+                                          try {
+                                                window.applicationCache.swapCache();
+                                                console.log('app-cache swaped');
+                                                location.reload(true);
+                                          } catch (error) {
+                                                console.log('app-cache swap failed');
+                                                console.log(error);
+                                          }
+                                    }
+                              });
+                  } else {
+                        console.log('app-cache not available');
+                        const appCacheElement = document.body.querySelector('#app-cache');
+                        document.body.removeChild(appCacheElement);
+                  }
+            } else {
+                  console.log('service-worker available');
+                  const appCacheElement = document.body.querySelector('#app-cache');
+                  document.body.removeChild(appCacheElement);
+                  navigator.serviceWorker
+                        .register('/service-worker.js')
+                        .then((registration) => {
+                              console.log('service-worker registered')
+                              const newWorker = registration.installing;
+
+                              registration.addEventListener('updatefound', () => {
+                                    const answer = confirm(`Une nouvelle version de l'application est disponible.
+Souhaitez-vous mettre à jour ?
+Assurez vous d'avoir une connexion stable.`)
+                                    if (answer) {
+                                          alert(`L'application va être mise à jour et redémarrer automatiquement.`)
+                                          setTimeout(() => { location.reload(true) }, 3000)
+                                    }
+                              })
+                        })
+                        .catch(() => { console.log('service-worker registration failed') });
+                  navigator.serviceWorker.addEventListener('controllerchange', () => {
+                        console.log('controller changed')
+                  })
+            }
+      </script>
+
+</body>
+
+
+</html>

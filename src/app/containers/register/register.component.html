@@ -1,0 +1,289 @@
+<mat-horizontal-stepper linear>
+
+  <mat-step label="Directives"
+            [stepControl]="dummyForm">
+    <form [formGroup]="dummyForm"></form>
+    <p>La procédure d'inscription se passe de la manière suivante:</p>
+    <p>Une fois les différents formulaires rempli et validés vous serez contacté par email pour régler le montant de l'abonnement
+      à l'application.</p>
+
+    <div fxLayout="row"
+         fxLayoutAlign="end center"
+         fxLayoutAlign.xs="start center"
+         fxLayoutGap="12px">
+      <button mat-raised-button
+              color="primary"
+              matStepperNext
+              type="button">Suivant</button>
+    </div>
+  </mat-step>
+
+  <mat-step label="Informations personnelles"
+            [stepControl]="profileForm">
+
+    <form [formGroup]="profileForm">
+      <div fxLayout="column">
+
+        <div fxFlex="1 1 auto"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput
+                   type="text"
+                   placeholder="Prénom"
+                   formControlName="firstName">
+          </mat-form-field>
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput
+                   type="text"
+                   placeholder="Nom"
+                   formControlName="lastName">
+          </mat-form-field>
+        </div>
+        <div fxFlex="1 1 auto"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput
+                   type="tel"
+                   placeholder="Tel."
+                   formControlName="tel">
+          </mat-form-field>
+
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput
+                   type="text"
+                   placeholder="Entreprise"
+                   formControlName="company">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row"
+           fxLayoutAlign="end center"
+           fxLayoutAlign.xs="start center"
+           fxLayoutGap="12px">
+        <button mat-raised-button
+                color="accent"
+                matStepperPrevious
+                type="button">Précédent</button>
+        <button mat-raised-button
+                color="primary"
+                matStepperNext
+                type="button">Suivant</button>
+
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step label="Adresse"
+            [stepControl]="addressForm">
+    <form [formGroup]="addressForm">
+      <div fxLayout="column"
+           fxLayoutGap="12px"
+           fxLayoutGap.xs="16px">
+        <div fxFlex="1 1 100%"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <input type="text"
+                   matInput
+                   placeholder="Rue & Numéro"
+                   formControlName="street">
+          </mat-form-field>
+        </div>
+        <div fxFlex="1 1 auto"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <input type="text"
+                   matInput
+                   placeholder="Ville"
+                   formControlName="city">
+            <mat-hint align="start">Ville ou Village ou Localité</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="1 1 auto">
+            <input type="text"
+                   matInput
+                   placeholder="Code postal"
+                   formControlName="zip">
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="1 1 auto"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <input type="text"
+                   matInput
+                   placeholder="Région"
+                   formControlName="region">
+            <mat-hint align="start">Région ou Canton ou Département</mat-hint>
+          </mat-form-field>
+          <mat-form-field fxFlex="1 1 auto">
+            <input type="text"
+                   matInput
+                   placeholder="Pays"
+                   formControlName="country"
+                   [matAutocomplete]="autoCompleteCountryRef">
+            <mat-autocomplete [style.display]="'hidden'"
+                              #autoCompleteCountryRef="matAutocomplete">
+              <mat-option *ngFor="let country of ['France', 'Suisse', 'Belgique']"
+                          [value]="country">
+                {{ country }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row"
+             fxLayoutAlign="end center"
+             fxLayoutAlign.xs="start center"
+             fxLayoutGap="12px">
+          <button mat-raised-button
+                  color="accent"
+                  matStepperPrevious
+                  type="button">Précédent</button>
+          <button mat-raised-button
+                  color="primary"
+                  matStepperNext
+                  type="button">Suivant</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step label="Paramètres"
+            [stepControl]="settingsForm">
+    <form [formGroup]="settingsForm">
+      <div fxLayout="column">
+
+        <div fxFlex="1 1 auto"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput
+                   type="number"
+                   formControlName="vat"
+                   placeholder="TVA">
+            <span matSuffix>%</span>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput
+                   type="number"
+                   formControlName="invoiceNumber"
+                   placeholder="Numéro de facture courant">
+            <mat-hint align="start">
+              <strong>Attention</strong>: Ce paramètre ne peut être éditer qu'une seule fois</mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="1 1 auto"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <mat-select placeholder="Devise"
+                        (change)="handleCurrencyChange($event)"
+                        formControlName="currency">
+              <mat-option *ngFor="let c of currencies"
+                          [value]="c">
+                {{ c | uppercase }}
+              </mat-option>
+            </mat-select>
+            <mat-hint align="start">
+              <strong>Attention</strong>: Ce paramètre ne peut être éditer qu'une seule fois</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput
+                   type="text"
+                   formControlName="siret"
+                   placeholder="Numéro siret">
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="1 1 auto"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field>
+            <input matInput
+                   type="string"
+                   formControlName="iban"
+                   placeholder="IBAN">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput
+                   type="string"
+                   formControlName="swift"
+                   placeholder="BIC / SWIFT">
+            <mat-hint>Pour paiements SEPA</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div fxLayout="row"
+           fxLayoutAlign="end center"
+           fxLayoutAlign.xs="start center"
+           fxLayoutGap="12px">
+        <button mat-raised-button
+                color="accent"
+                matStepperPrevious
+                type="button">Précédent</button>
+        <button mat-raised-button
+                color="primary"
+                matStepperNext
+                type="button">Suivant</button>
+
+      </div>
+
+    </form>
+  </mat-step>
+
+  <mat-step label="Valider"
+            [stepControl]="validForm">
+    <form [formGroup]="validForm">
+      <mat-checkbox formControlName="valid"
+                    (change)="handleValidityChange($event)">Je souhaite utiliser l'application et confirme avoir fournis des informations exactes.</mat-checkbox>
+      <div fxLayout="row"
+           fxLayoutAlign="end center"
+           fxLayoutAlign.xs="start center"
+           fxLayoutGap="12px">
+        <button #action
+                mat-raised-button
+                color="primary"
+                matStepperNext
+                type="button"
+                (click)="handleSubmit()"
+                disabled>Valider</button>
+      </div>
+    </form>
+  </mat-step>
+
+</mat-horizontal-stepper>

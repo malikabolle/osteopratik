@@ -1,0 +1,16 @@
+@import './../../../common/styles/mixins.scss';
+:host {
+    @include default-width();
+    display: block;
+    box-sizing: border-box;
+    .picture {
+        height: 100px;
+        width: 200px;
+        object-fit: cover;
+        margin: 6px;
+        cursor: pointer;
+    }
+    mat-form-field {
+        width: 100%;
+    }
+}

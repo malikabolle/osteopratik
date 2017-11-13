@@ -1,0 +1,32 @@
+<div class="actions">
+
+        <button mat-icon-button
+                [matMenuTriggerFor]="titleMenu"
+                matTooltip="Titre"
+                matTooltipPosition="below">
+                <mat-icon>title</mat-icon>
+        </button>
+
+        <mat-menu #titleMenu="matMenu">
+                <button mat-menu-item
+                        *ngFor="let level of [1,2,3,4]"
+                        (click)="header(level)">Titre de niveau {{level}}</button>
+        </mat-menu>
+
+        <button mat-icon-button
+                (click)="rule()"
+                matTooltip="Séparateur horizontal"
+                matTooltipPosition="below">
+                <mat-icon>border_horizontal</mat-icon>
+        </button>
+
+        <app-image-input (imageChange)="updateLogo($event)"></app-image-input>
+</div>
+<mat-form-field>
+        <textarea class="render"
+                  #textArea
+                  matInput
+                  rows="15"
+                  [(ngModel)]="template"
+                  placeholder="Editeur"></textarea>
+</mat-form-field>

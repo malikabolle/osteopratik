@@ -1,0 +1,60 @@
+<h2>Factures</h2>
+<h3>En attente</h3>
+
+<div class="mat-elevation-z4">
+  <mat-table [dataSource]="dataSource"
+             matSort
+             matSortActive="invoiceNumber"
+             matSortDisableClear
+             matSortDirection="asc">
+
+    <ng-container cdkColumnDef="invoiceNumber">
+      <mat-header-cell *cdkHeaderCellDef
+                       mat-sort-header
+                       [style.minWidth.px]="140"> Numéro </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"
+                [style.minWidth.px]="140"> {{row.invoiceNumber}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="emissionDate">
+      <mat-header-cell *cdkHeaderCellDef
+                       mat-sort-header
+                       [style.minWidth.px]="140"> Date d'émission </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"
+                [style.minWidth.px]="140"> {{row.emissionDate | date: 'shortDate'}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="status">
+      <mat-header-cell *cdkHeaderCellDef
+                       mat-sort-header
+                       [style.minWidth.px]="140"> Statut </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"
+                [style.minWidth.px]="140">
+        <ng-container [ngSwitch]="row.status">
+          <span *ngSwitchCase="invoiceStatus.invoiceGenerated">Générée</span>
+          <span *ngSwitchCase="invoiceStatus.invoiceDone">Validée</span>
+          <span *ngSwitchCase="invoiceStatus.invoiceEmitted">Emise</span>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container cdkColumnDef="details">
+      <mat-header-cell *cdkHeaderCellDef
+                       [style.maxWidth.px]="50"
+                       [style.minWidth.px]="50"> Détails </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"
+                [style.maxWidth.px]="50"
+                [style.minWidth.px]="50">
+        <a mat-icon-button
+           color="primary"
+           [routerLink]="['../../../../customer-lazy', 'customer', row.customerKey, 'animal-lazy', 'animal', row.animalKey, 'consultation-lazy', 'consultation', row.consultationKey]">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </a>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="fields"></mat-header-row>
+    <mat-row *cdkRowDef="let row; columns: fields;"></mat-row>
+  </mat-table>
+</div>

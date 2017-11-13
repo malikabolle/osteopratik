@@ -1,0 +1,73 @@
+<h2>Ajouter une consultation</h2>
+<mat-card>
+  <form [formGroup]="form"
+        (ngSubmit)="addConsultation(form.value)"
+        fxLayoutGap="16px"
+        fxLayout="column">
+
+    <div fxFlex="1 1 auto"
+         fxLayout="row"
+         fxLayout.xs="column"
+         fxLayoutGap="12px"
+         fxLayoutGap.xs="16px"
+         fxLayoutAlign="start center">
+      <mat-form-field fxFlex="1 1 auto">
+        <input type="text"
+               matInput
+               placeholder="Raison"
+               formControlName="reason">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="1 1 auto"
+         fxLayout="row"
+         fxLayout.xs="column"
+         fxLayoutGap="12px"
+         fxLayoutGap.xs="16px"
+         fxLayoutAlign="start center">
+      <mat-form-field fxFlex="1 1 auto">
+        <input matInput
+               [matDatepicker]="birthdayPickerRef"
+               placeholder="Date"
+               formControlName="date">
+        <mat-datepicker-toggle matSuffix
+                               [for]="birthdayPickerRef"></mat-datepicker-toggle>
+        <mat-datepicker touchUi="true"
+                        #birthdayPickerRef>
+        </mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field fxFlex="1 1 auto">
+        <input type="time"
+               matInput
+               placeholder="Heure"
+               formControlName="time">
+      </mat-form-field>
+
+    </div>
+
+
+
+    <div fxLayout="row"
+         fxLayoutAlign="end center"
+         fxLayoutAlign.xs="start center"
+         fxLayoutGap="12px">
+      <a fxFlex.xs="1 1 auto"
+         fxFlex="0 0 auto"
+         mat-raised-button
+         color="accent"
+         [routerLink]="['../../../']">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </a>
+
+      <button #action
+              fxFlex.xs="1 1 auto"
+              fxFlex="0 0 auto"
+              mat-raised-button
+              color="primary"
+              [disabled]="form.invalid || form.pristine"
+              type="submit">AJOUTER</button>
+    </div>
+
+  </form>
+</mat-card>

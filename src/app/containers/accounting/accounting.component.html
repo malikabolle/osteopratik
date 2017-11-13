@@ -1,0 +1,19 @@
+<h2>Comptabilité</h2>
+<div fxLayout="column"
+     fxLayoutGap="12px">
+  <mat-form-field>
+    <mat-select [(ngModel)]="year"
+                placeholder="Année à exporter">
+      <mat-option *ngFor="let year of years"
+                  [value]="year">{{year}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div fxLayout="row"
+       fxLayoutAlign="end center"
+       fxLayoutAlign.xs="start center"
+       fxLayoutGap="12px">
+    <a mat-raised-button
+       color="primary"
+       [routerLink]="['/print-all', year]">EXPORTER</a>
+  </div>

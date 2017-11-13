@@ -1,0 +1,9 @@
+@import './../../common/styles/mixins.scss';
+:host {
+    @include small-width();
+    display: block;
+    box-sizing: border-box;
+    mat-form-field {
+        width: 100%;
+    }
+}

@@ -1,0 +1,108 @@
+<div class="render"
+     [innerHTML]="html$ | async"></div>
+
+
+<ng-container *ngIf="profile$ | async; let profile">
+  <div class="address">
+    <div>{{profile.firstName}} {{profile.lastName}}</div>
+    <div>{{profile.address.street}}</div>
+    <div>{{profile.address.zip}} - {{profile.address.city}}</div>
+    <div>{{profile.address.region}} - {{profile.address.country}}</div>
+    <div>{{profile.tel}}</div>
+    <div>{{profile.email}}</div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="customer$ | async; let customer">
+  <div fxLayout
+       fxLayoutAlign="end">
+    <div class="address"
+         [style.minWidth.px]="200">
+      <div>{{customer.firstName}} {{customer.lastName}}</div>
+      <div>{{customer.address.street}}</div>
+      <div>{{customer.address.zip}} - {{customer.address.city}}</div>
+      <div>{{customer.address.region}} - {{customer.address.country}}</div>
+      <!-- <div>{{customer.tel}}</div> -->
+      <!-- <div>{{customer.email}}</div> -->
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="invoice$ | async; let invoice">
+  <ng-container *ngIf="animal$ | async; let animal">
+    <ng-container *ngIf="consultation$ | async; let consultation">
+      <h3>Note d'honoraires #{{invoice.invoiceNumber}} du {{invoice.emissionDate | date: 'shortDate'}}</h3>
+      <p>Veuillez trouver ci-joint la note d'honoraires concernant {{animal.name}} pour les soins donnés le {{consultation.date
+        | date: 'shortDate'}}.</p>
+
+      <table>
+        <tr>
+          <td>Montant de base</td>
+          <td>{{invoice.amount | currency: invoice.currency : true: '3.2-2'}}</td>
+        </tr>
+        <tr>
+          <td>Frais</td>
+          <td>{{invoice.fees | currency: invoice.currency : true: '3.2-2'}}</td>
+        </tr>
+        <tr>
+          <td>Rabais</td>
+          <td>{{invoice.discount | currency: invoice.currency : true: '3.2-2'}}</td>
+        </tr>
+        <tr>
+          <td>Sous-total</td>
+          <td>{{(invoice.amount + invoice.fees - invoice.discount) | currency: invoice.currency : true: '3.2-2'}}</td>
+        </tr>
+        <tr>
+          <td>TVA</td>
+          <td *ngIf="invoice.vat !== 0; else vatTemplate">{{invoice.vat }} %</td>
+          <ng-template #vatTemplate>
+            <td>Non applicable, art. 293B du CGI</td>
+          </ng-template>
+        </tr>
+        <tr>
+          <td>
+            <strong>Total</strong>
+          </td>
+          <td>
+            <strong>{{ (invoice.amount + invoice.fees - invoice.discount) * (100 + invoice.vat) / 100 | currency: invoice.currency
+              : true: '3.2-2'}}</strong>
+          </td>
+        </tr>
+      </table>
+      <ng-container *ngIf="settings$ | async; let settings">
+        <p>Ci-dessous, les informations bancaires nécessaires au paiement.</p>
+        <table>
+          <tr>
+            <td>
+              <strong>IBAN</strong>
+            </td>
+            <td>
+              <strong>{{settings.iban}}</strong>
+            </td>
+          </tr>
+          <tr *ngIf="settings.swift">
+            <td>
+              <strong>BIC / SWIFT</strong>
+            </td>
+            <td>
+              <strong>{{settings.swift}}</strong>
+            </td>
+          </tr>
+          <tr *ngIf="settings.siret">
+            <td>
+              <strong>NUMERO SIRET</strong>
+            </td>
+            <td>
+              <strong>{{settings.siret}}</strong>
+            </td>
+          </tr>
+        </table>
+        <p>
+          <strong>Payable dans les 30 jours.</strong>
+        </p>
+        <h3 *ngIf="invoice.comment">Remarques</h3>
+        <p> {{invoice.comment}} </p>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>

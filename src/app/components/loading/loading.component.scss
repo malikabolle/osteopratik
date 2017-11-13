@@ -1,0 +1,14 @@
+:host {
+    display: block;
+    padding-top: 24px;
+    padding-bottom: 24px;
+    margin: auto;
+    .mat-progress-spinner {
+        margin-top: 64px;
+        margin: auto;
+    }
+    .spinner-label {
+        margin-top: 32px;
+        text-align: center;
+    }
+}

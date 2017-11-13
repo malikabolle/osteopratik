@@ -1,0 +1,41 @@
+<h2>Administration</h2>
+<h3>Utilisateurs</h3>
+
+<mat-table [dataSource]="dataSource"
+           matSort
+           matSortActive="name"
+           matSortDisableClear
+           matSortDirection="asc"
+           class="mat-elevation-z4">
+
+  <ng-container cdkColumnDef="firstName">
+    <mat-header-cell *cdkHeaderCellDef
+                     mat-sort-header> Prénom </mat-header-cell>
+    <mat-cell *cdkCellDef="let row"> {{row.firstName}} </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="lastName">
+    <mat-header-cell *cdkHeaderCellDef
+                     mat-sort-header> Nom </mat-header-cell>
+    <mat-cell *cdkCellDef="let row"> {{row.lastName}} </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="email">
+    <mat-header-cell *cdkHeaderCellDef
+                     mat-sort-header> Email </mat-header-cell>
+    <mat-cell *cdkCellDef="let row"> {{row.email}} </mat-cell>
+  </ng-container>
+
+  <ng-container cdkColumnDef="active">
+    <mat-header-cell *cdkHeaderCellDef
+                     mat-sort-header> Compte Actif </mat-header-cell>
+    <mat-cell *cdkCellDef="let row">
+      <mat-slide-toggle color="primary"
+                        [checked]="row.active"
+                        (change)="toggleAccount($event, row)"></mat-slide-toggle>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *cdkHeaderRowDef="fields"></mat-header-row>
+  <mat-row *cdkRowDef="let row; columns: fields;"></mat-row>
+</mat-table>

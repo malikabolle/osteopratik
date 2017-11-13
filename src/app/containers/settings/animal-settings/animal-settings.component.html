@@ -1,0 +1,107 @@
+<h2>Paramètres</h2>
+<h3>Animaux</h3>
+<div id="container"
+     fxLayout="column"
+     fxLayoutGap="12px">
+
+  <mat-card>
+    <mat-card-subtitle>
+      <h4>Définir le montant par défault en fonction de la race</h4>
+    </mat-card-subtitle>
+
+    <mat-card-content>
+      <form [formGroup]="updateBreedForm"
+            (ngSubmit)="updateBreed(updateBreedForm.value)"
+            fxLayoutGap="16px"
+            fxLayout="column">
+
+        <div fxFlex="1 1 auto"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <mat-select placeholder="Race"
+                        formControlName="name"
+                        (change)="handleBreedChange($event)">
+
+              <mat-option *ngFor="let breed of breeds$ | async"
+                          [value]="breed.name">
+                {{ breed.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput
+                   type="number"
+                   formControlName="price"
+                   placeholder="Montant par défault">
+          </mat-form-field>
+        </div>
+
+
+        <div fxLayout
+             fxLayoutAlign="end center"
+             fxLayoutAlign.xs="center center">
+          <button fxFlex.xs="1 1 100%"
+                  fxFlex="0 0 auto"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="updateBreedForm.invalid || updateBreedForm.pristine"
+                  type="submit">SAUVEGARDER</button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-subtitle>
+      <h4> Ajouter une nouvelle race</h4>
+    </mat-card-subtitle>
+
+    <mat-card-content>
+      <form [formGroup]="addBreedForm"
+            (ngSubmit)="addBreed(addBreedForm.value)"
+            fxLayoutGap="16px"
+            fxLayout="column">
+
+        <div fxFlex="1 1 auto"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput
+                   type="text"
+                   formControlName="name"
+                   placeholder="Race"
+                   #breedAddRef>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="1 1 auto">
+            <input matInput
+                   type="number"
+                   formControlName="price"
+                   placeholder="Montant par défault">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout
+             fxLayoutAlign="end center"
+             fxLayoutAlign.xs="center center">
+          <button fxFlex.xs="1 1 100%"
+                  fxFlex="0 0 auto"
+                  mat-raised-button
+                  color="primary"
+                  [disabled]="addBreedForm.invalid || addBreedForm.pristine"
+                  type="submit">AJOUTER</button>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

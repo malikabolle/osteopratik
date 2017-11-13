@@ -1,0 +1,14 @@
+<div fxLayout="row"
+     fxLayoutAlign="start center">
+
+    <label #label>
+            <input type="file" accept="image/*" (change)="onImageChange($event)">
+    </label>
+
+    <button mat-icon-button
+            type="button"
+            (click)="label.click()">
+        <mat-icon>add_a_photo</mat-icon>
+    </button>
+
+</div>

@@ -1,0 +1,10 @@
+:host {
+    @media screen and (max-width: 599px) {
+        .youtube-player {
+            iframe {
+                display: block;
+                margin: auto;
+            }
+        }
+    }
+}

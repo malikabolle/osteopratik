@@ -1,0 +1,42 @@
+@import './../../../common/styles/mixins.scss';
+:host {
+    @include default-width();
+    display: block;
+    box-sizing: border-box;
+    mat-card {
+        margin-bottom: 12px;
+    }
+    mat-form-field {
+        width: 100%;
+    }
+    /deep/ {
+        .render {
+            .flex-container {
+                display: flex;
+                .fill {
+                    flex: 1 1 auto;
+                    width: 100%;
+                }
+                p {
+                    flex: 1 1 auto;
+                }
+            }
+            .space {
+                height: 1em;
+            }
+            .address {
+                min-width: 200px;
+            }
+            p {
+                margin: 0;
+                white-space: pre;
+            }
+            img {
+                display: block;
+                height: 100px;
+                width: 200px;
+                object-fit: scale-down;
+            }
+        }
+    }
+}

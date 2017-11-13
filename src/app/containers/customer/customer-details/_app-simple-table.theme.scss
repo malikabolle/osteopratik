@@ -1,0 +1,33 @@
+@import '~@angular/material/theming';
+@mixin app-simple-table-theme($theme) {
+    app-customer-details,
+    app-animal-details,
+    app-consultation-details,
+    app-invoice-details {
+        .app-simple-table {
+            .mat-card {
+                border-bottom: solid 1px map-get(map-get($theme, foreground), divider);
+            }
+            .mat-expansion-panel {
+                border-bottom: solid 1px map-get(map-get($theme, foreground), divider);
+            }
+        }
+    }
+}
+
+@mixin app-simple-table-typography($theme) {
+    app-customer-details,
+    app-animal-details,
+    app-consultation-details,
+    app-invoice-details {
+        .app-simple-table {
+            .mat-card {
+                div {
+                    span:nth-child(1) {
+                        @include mat-typography-level-to-styles($typography, caption);
+                    }
+                }
+            }
+        }
+    }
+}

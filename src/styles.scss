@@ -1,0 +1,129 @@
+// @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,500');
+// @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+// @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import '~@angular/material/theming';
+html,
+body {
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    background: transparent;
+    &.print-fix {
+        height: auto;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    display: block;
+    box-sizing: border-box;
+}
+
+span,
+p {
+    word-break: break-all;
+    word-break: break-word;
+    hyphens: auto;
+    text-align: justify;
+}
+
+h1 {
+    text-transform: uppercase;
+}
+
+main {
+    h2,
+    h3,
+    h4 {
+        text-transform: uppercase;
+        text-decoration: underline;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.mat-card-subtitle {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        text-transform: none;
+        text-decoration: none;
+    }
+}
+
+.mat-paginator {
+    @include mat-elevation(4);
+}
+
+.mat-table {
+    @media screen and (min-width: 600px) {
+        max-height: 540px;
+    }
+    @media screen and (max-width: 599px) {
+        max-height: 320px;
+    }
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    .mat-row {
+        flex: 1 1 100%;
+        @media screen and (max-width: 600px) {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    }
+    .mat-header-row {
+        flex: 1 1 100%;
+        @media screen and (max-width: 600px) {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+    }
+}
+
+.mat-raised-button {
+    min-width: 120px !important;
+}
+
+.mat-checkbox-layout .mat-checkbox-label {
+    line-height: 24px;
+}
+
+agm-map {
+    /*     /deep/ div.agm-map-container-inner.sebm-google-map-container-inner {
+        @include mat-elevation(4);
+        margin: 24px 0;
+    } */
+}
+
+.mat-paginator {
+    .mat-form-field {
+        width: 50px;
+    }
+    .mat-paginator-range-label {
+        flex: 1 1 auto;
+        text-align: end;
+    }
+    .mat-paginator-page-size {
+        margin: 0;
+        flex: 0 0 auto;
+    }
+    .mat-paginator-navigation-previous,
+    .mat-paginator-navigation-next {
+        flex: 0 0 auto;
+    }
+}

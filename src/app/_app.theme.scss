@@ -1,0 +1,97 @@
+@import '~@angular/material/theming';
+@mixin app-theme($theme) {
+     ::-webkit-scrollbar-thumb {
+        background: map-get( map-get($theme, foreground), secondary-text);
+    }
+     ::-webkit-scrollbar-track,
+     ::-webkit-scrollbar {
+        background: map-get(map-get($theme, background), card);
+    }
+     ::-webkit-scrollbar-corner {
+        background: transparent;
+    }
+    main {
+        a {
+            color: map-get(map-get($theme, primary), default);
+        }
+        h2 {
+            text-decoration-color: map-get(map-get($theme, primary), darker);
+        }
+        h3 {
+            text-decoration-color: map-get(map-get($theme, primary), default);
+        }
+        h4 {
+            text-decoration-color: map-get(map-get($theme, primary), lighter);
+        }
+        .color-success {
+            color: mat-color($mat-green, 300);
+        }
+        .color-error {
+            color: mat-color($mat-red, 300);
+        }
+        .color-info {
+            color: mat-color($mat-blue, 300);
+        }
+    }
+    snack-bar-container.light-theme {
+        background-color: map-get(map-get($theme, background), dialog);
+        color: map-get(map-get($theme, foreground), text);
+        @include mat-elevation(4);
+    }
+    snack-bar-container.dark-theme {
+        background-color: map-get(map-get($theme, background), dialog);
+        color: map-get(map-get($theme, foreground), text);
+        @include mat-elevation(4);
+    }
+}
+
+@mixin app-typography($typography) {
+    body {
+        @include mat-typography-level-to-styles($typography, body-1);
+        h1 {
+            @include mat-typography-level-to-styles($typography, display-4);
+        }
+        h2 {
+            @include mat-typography-level-to-styles($typography, display-3);
+        }
+        h3 {
+            @include mat-typography-level-to-styles($typography, display-2);
+        }
+        h4 {
+            @include mat-typography-level-to-styles($typography, display-1);
+        }
+        h5 {
+            @include mat-typography-level-to-styles($typography, caption);
+        }
+        h6 {
+            @include mat-typography-level-to-styles($typography, caption);
+        }
+    }
+    .mat-select-placeholder,
+    .mat-select-value-text,
+    .mat-input-element {
+        @include mat-typography-level-to-styles($typography, body-2);
+    }
+    .mat-menu-item {
+        @include mat-typography-level-to-styles($typography, body-1);
+    }
+    .mat-card-subtitle {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            @include mat-typography-level-to-styles($typography, body-2);
+        }
+    }
+    .mat-toolbar {
+        .mat-toolbar-layout {
+            .mat-toolbar-row {
+                h1 {
+                    @include mat-typography-level-to-styles($typography, title);
+                }
+            }
+        }
+    }
+}

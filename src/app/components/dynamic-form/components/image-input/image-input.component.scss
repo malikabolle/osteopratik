@@ -1,0 +1,18 @@
+// @import '~@angular/material/theming';
+:host {
+    display: block;
+    input[type="file"],
+    input[type="text"] {
+        display: none;
+    }
+    img {
+        // @include mat-elevation(4);
+        display: block;
+        height: 100px;
+        width: auto;
+        margin: 1em 1em 1em 1em;
+    }
+    span {
+        margin-top: 6px;
+    }
+}

@@ -1,0 +1,59 @@
+<h2>Consultations</h2>
+<h3>à venir</h3>
+<div class="mat-elevation-z4">
+  <mat-table [dataSource]="dataSource"
+             matSort
+             matSortActive="date"
+             matSortDisableClear
+             matSortDirection="asc">
+
+    <ng-container cdkColumnDef="reason">
+      <mat-header-cell *cdkHeaderCellDef
+                       [style.minWidth.px]="140"
+                       mat-sort-header> Raison </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"
+                [style.minWidth.px]="140"> {{row.reason}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="date">
+      <mat-header-cell *cdkHeaderCellDef
+                       [style.minWidth.px]="140"
+                       mat-sort-header> Date & Heure </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"
+                [style.minWidth.px]="140"> {{row.date | date: 'shortDate'}} à {{row.time}} </mat-cell>
+    </ng-container>
+
+    <ng-container cdkColumnDef="status">
+      <mat-header-cell *cdkHeaderCellDef
+                       [style.minWidth.px]="140"
+                       mat-sort-header> Statut </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"
+                [style.minWidth.px]="140">
+        <ng-container [ngSwitch]="row.status">
+          <span *ngSwitchCase="consultationStatus.consultationCanceled">Annulée</span>
+          <span *ngSwitchCase="consultationStatus.consultationProgrammed">Programmée</span>
+          <span *ngSwitchCase="consultationStatus.consultationDone">Terminée</span>
+        </ng-container>
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container cdkColumnDef="details">
+      <mat-header-cell *cdkHeaderCellDef
+                       [style.maxWidth.px]="50"
+                       [style.minWidth.px]="50"> Détails </mat-header-cell>
+      <mat-cell *cdkCellDef="let row"
+                [style.maxWidth.px]="50"
+                [style.minWidth.px]="50">
+        <a mat-icon-button
+           color="primary"
+           [routerLink]="['../../customer-lazy', 'customer', row.customerKey, 'animal-lazy', 'animal', row.animalKey, 'consultation-lazy', 'consultation', row.$key]">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </a>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *cdkHeaderRowDef="fields"></mat-header-row>
+    <mat-row *cdkRowDef="let row; columns: fields;"></mat-row>
+  </mat-table>
+</div>

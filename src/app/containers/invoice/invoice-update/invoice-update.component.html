@@ -1,0 +1,59 @@
+<h2>Compléter la facture</h2>
+<mat-card>
+  <mat-card-content>
+
+    <form [formGroup]="form"
+          (ngSubmit)="updateInvoice(form.value)"
+          fxLayoutGap="16px"
+          fxLayout="column">
+
+      <div fxFlex="1 1 auto"
+           fxLayout="row"
+           fxLayout.xs="column"
+           fxLayoutGap="12px"
+           fxLayoutGap.xs="16px"
+           fxLayoutAlign="start center">
+        <mat-form-field>
+          <input matInput
+                 type="number"
+                 placeholder="Montant"
+                 formControlName="amount">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+                 type="number"
+                 placeholder="Rabais"
+                 formControlName="discount">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput
+                 type="number"
+                 placeholder="Frais divers"
+                 formControlName="fees">
+          <mat-hint>Frais de déplacement / autres</mat-hint>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row"
+           fxLayoutAlign="end center"
+           fxLayoutAlign.xs="start center"
+           fxLayoutGap="12px">
+        <a fxFlex.xs="1 1 auto"
+           fxFlex="0 0 auto"
+           mat-raised-button
+           color="accent"
+           [routerLink]="['../../../']">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </a>
+
+        <button fxFlex.xs="1 1 auto"
+                fxFlex="0 0 auto"
+                mat-raised-button
+                color="primary"
+                [disabled]="form.invalid"
+                type="submit">GENERER</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

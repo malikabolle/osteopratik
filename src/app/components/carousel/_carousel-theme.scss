@@ -1,0 +1,12 @@
+@mixin app-carousel-theme($theme) {
+    #selectors {
+        .selector {
+            &:not(.selected) {
+                background: map-get(map-get($theme, foreground), hint-text);
+            }
+            &:hover:not(.selected) {
+                background: map-get(map-get($theme, foreground), secondary-text);
+            }
+        }
+    }
+}

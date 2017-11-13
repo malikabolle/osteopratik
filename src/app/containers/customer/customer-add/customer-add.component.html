@@ -1,0 +1,153 @@
+<h2>Ajouter un client</h2>
+<mat-card>
+  <mat-card-content>
+
+    <form [formGroup]="form"
+          (ngSubmit)="addCustomer(form.value)"
+          fxLayoutGap="16px"
+          fxLayout="column">
+
+      <div fxFlex="1 1 auto"
+           fxLayout="row"
+           fxLayout.xs="column"
+           fxLayoutGap="12px"
+           fxLayoutGap.xs="16px"
+           fxLayoutAlign="start center">
+
+        <mat-form-field fxFlex="1 1 auto">
+          <input type="text"
+                 matInput
+                 placeholder="Prénom"
+                 formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field fxFlex="1 1 auto">
+          <input type="text"
+                 matInput
+                 placeholder="Nom"
+                 formControlName="lastName">
+        </mat-form-field>
+
+      </div>
+
+      <div fxFlex="1 1 auto"
+           fxLayout="row"
+           fxLayout.xs="column"
+           fxLayoutGap="12px"
+           fxLayoutGap.xs="16px"
+           fxLayoutAlign="start center">
+        <mat-form-field fxFlex="1 1 auto">
+          <input type="text"
+                 matInput
+                 placeholder="Tel."
+                 formControlName="tel">
+        </mat-form-field>
+        <mat-form-field fxFlex="1 1 auto">
+          <input type="email"
+                 matInput
+                 placeholder="Email"
+                 formControlName="email">
+        </mat-form-field>
+      </div>
+
+      <mat-form-field fxFlex="1 1 auto">
+        <input type="text"
+               matInput
+               placeholder="Entreprise"
+               formControlName="company">
+      </mat-form-field>
+
+      <div formGroupName="address"
+           fxLayout="column"
+           fxLayoutGap="12px"
+           fxLayoutGap.xs="16px">
+
+        <div fxFlex="1 1 100%"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <input type="text"
+                   matInput
+                   placeholder="Rue & Numéro"
+                   formControlName="street">
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="1 1 auto"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <input type="text"
+                   matInput
+                   placeholder="Ville"
+                   formControlName="city">
+            <mat-hint align="start">Village ou Village ou Localité</mat-hint>
+          </mat-form-field>
+          <mat-form-field fxFlex="1 1 auto">
+            <input type="text"
+                   matInput
+                   placeholder="Code postal"
+                   formControlName="zip">
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="1 1 auto"
+             fxLayout="row"
+             fxLayout.xs="column"
+             fxLayoutGap="12px"
+             fxLayoutGap.xs="16px"
+             fxLayoutAlign="start center">
+          <mat-form-field fxFlex="1 1 auto">
+            <input type="text"
+                   matInput
+                   placeholder="Région"
+                   formControlName="region">
+            <mat-hint align="start">Région ou Canton ou Département</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field fxFlex="1 1 auto">
+            <input type="text"
+                   matInput
+                   placeholder="Pays"
+                   formControlName="country"
+                   [matAutocomplete]="autoCompleteCountryRef">
+            <mat-autocomplete #autoCompleteCountryRef="matAutocomplete">
+              <mat-option *ngFor="let country of ['France', 'Suisse', 'Belgique']"
+                          [value]="country">
+                {{ country }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+
+      </div>
+
+      <div fxLayout="row"
+           fxLayoutAlign="end center"
+           fxLayoutAlign.xs="start center"
+           fxLayoutGap="12px">
+        <a fxFlex.xs="1 1 auto"
+           fxFlex="0 0 auto"
+           mat-raised-button
+           color="accent"
+           [routerLink]="['../']">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </a>
+
+        <button #action
+                fxFlex.xs="1 1 auto"
+                fxFlex="0 0 auto"
+                mat-raised-button
+                color="primary"
+                [disabled]="form.invalid || form.pristine"
+                type="submit">AJOUTER</button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
