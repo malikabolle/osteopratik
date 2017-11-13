@@ -32,8 +32,8 @@ const active = [
 ]
 const support = [
   new SidenavLink('Support', '', '', true, false, false, false),
-  new SidenavLink('Aide', 'https://github.com/thibaultsavary/osteopratik/blob/master/README.md', 'help_outline', false, false, true, false),
-  new SidenavLink('Signaler un bug', 'https://github.com/thibaultsavary/osteopratik/issues', 'bug_report', false, false, true, false),
+  new SidenavLink('Aide', 'https://github.com/malikabolle/osteopratik/blob/master/README.md', 'help_outline', false, false, true, false),
+  new SidenavLink('Signaler un bug', 'https://github.com/malikabolle/osteopratik/issues', 'bug_report', false, false, true, false),
 ]
 const admin = [
   new SidenavLink('Administration', '', '', true, false, false, false),

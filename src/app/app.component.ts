@@ -12,7 +12,7 @@ export class AppComponent {
     const mode = environment.production ? 'PROD' : 'DEV'
     console.log(`Mode                ${mode}
 Version             ${environment.version}
-Source              https://github.com/thibaultsavary/osteopratik
+Source              https://github.com/malikabolle/osteopratik
 Owner               Malika Bolle
 By                  Thibault Savary
 Contact             thibaultsavary@protonmail.ch

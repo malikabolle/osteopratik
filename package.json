@@ -13,6 +13,7 @@
     "debug-ios": "remotedebug_ios_webkit_adapter",
     "service-worker": "sw-precache --root=dist --config=./scripts/sw-precache-config.js",
     "deploy-dev": "ng build --aot --dev && npm run service-worker && npm run app-cache && firebase deploy",
+    "deploy": "npm run build --prod && npm run service-worker && npm run app-cache && firebase deploy",
     "deploy-patch": "npm version patch && npm run build --prod && npm run service-worker && npm run app-cache && firebase deploy",
     "deploy-minor": "npm version minor && npm run build --prod && npm run service-worker && npm run app-cache && firebase deploy",
     "deploy-major": "npm version major && npm run build --prod && npm run service-worker && npm run app-cache && firebase deploy",
