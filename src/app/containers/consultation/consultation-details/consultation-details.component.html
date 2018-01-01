@@ -266,7 +266,7 @@
                                                   matInput
                                                   cols="30"
                                                   rows="10"
-                                                  [(ngModel)]="comment">
+                                                  [(ngModel)]="invoice.comment">
                                         asdasda
                                     </textarea>
                                     </mat-form-field>
@@ -274,7 +274,7 @@
                                             fxFlex="1 1 auto"
                                             mat-raised-button
                                             color="primary"
-                                            (click)="updateInvoice({status: selectStatusRef.selected.value, comment: comment})">SAUVEGARDER</button>
+                                            (click)="updateInvoice({status: selectStatusRef.selected.value, comment: invoice.comment})">SAUVEGARDER</button>
                                 </ng-container>
                                 <ng-template #baseTemplateRef>
                                     <button fxFlex="1 1 auto"

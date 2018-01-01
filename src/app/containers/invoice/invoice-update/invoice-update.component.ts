@@ -41,7 +41,7 @@ export class InvoiceUpdateComponent implements OnInit {
   updateInvoice(invoice: Invoice | any) {
     this._dataService.year$.switchMap((year) => this._dataService.settings$
       .switchMap(({ invoiceNumber }) => this._dataService
-        .updateInvoice({ ...invoice, status: invoiceStatus.invoiceDone, invoiceNumber: `${year}-${invoiceNumber}` }, true)))
+        .updateInvoice({ ...invoice, status: invoiceStatus.invoiceDone, invoiceNumber: `${year}-${invoiceNumber}`, comment: '' }, true)))
       .first()
       .toPromise()
       .then(() => this._router.navigate(['../../../read'], { relativeTo: this._route }))

@@ -43,8 +43,6 @@ export class ConsultationDetailsComponent implements OnInit, OnDestroy {
   invoiceStatus = invoiceStatus
   consultationStatus = consultationStatus
 
-  comment: string
-
   constructor(
     private _dataService: DataService,
     private _route: ActivatedRoute,
@@ -86,7 +84,7 @@ export class ConsultationDetailsComponent implements OnInit, OnDestroy {
   }
   updateInvoice(invoice: Invoice | any) {
     // console.log(invoice)
-    this._dataService.updateInvoice(invoice)
+    this._dataService.updateInvoice({ ...invoice })
       .then((response: any | null | undefined) => this._feedbackService.success$$.next())
       .catch((error: Error | any) => this._feedbackService.error$$.next(error))
   }
