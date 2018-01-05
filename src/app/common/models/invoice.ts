@@ -20,7 +20,7 @@ export type InvoiceTemplate = string
 
 export class Invoice {
   constructor(
-    public invoiceNumber: number,
+    public invoiceNumber: string,
     public status: InvoiceStatus,
     public amount: number,
     public fees: number,

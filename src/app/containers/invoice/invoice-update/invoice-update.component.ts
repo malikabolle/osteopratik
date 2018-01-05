@@ -39,9 +39,33 @@ export class InvoiceUpdateComponent implements OnInit {
   }
 
   updateInvoice(invoice: Invoice | any) {
-    this._dataService.year$.switchMap((year) => this._dataService.settings$
-      .switchMap(({ invoiceNumber }) => this._dataService
-        .updateInvoice({ ...invoice, status: invoiceStatus.invoiceDone, invoiceNumber: `${year}-${invoiceNumber}`, comment: '' }, true)))
+
+    const lastInvoiceYear$ = this._dataService.allInvoices$
+      .first()
+      .defaultIfEmpty([])
+      .map(invoices => invoices.sort((a, b) => a.invoiceNumber > b.invoiceNumber ? 1 : -1))
+      .map(invoices => invoices.filter(_invoice => !!_invoice.invoiceNumber))
+      .map(invoices => invoices[invoices.length - 1])
+      .map(({ invoiceNumber }) => +(invoiceNumber as string).split('-')[0])
+      .do(console.log)
+      .defaultIfEmpty((new Date()).getFullYear())
+      .do(console.log)
+
+
+    lastInvoiceYear$
+      .defaultIfEmpty((new Date()).getFullYear())
+      .switchMap((lastInvoiceYear) => {
+        const year = new Date().getFullYear()
+        console.log(year, lastInvoiceYear, invoice)
+        if (lastInvoiceYear !== year) {
+          return Observable
+            .fromPromise(this._dataService.updateSettings({ invoiceNumber: 1 }))
+            .switchMap(() => this._dataService.updateInvoice({ ...invoice, status: invoiceStatus.invoiceDone, invoiceNumber: `${year}-${1}`, comment: '' }, true))
+        } else {
+          return this._dataService.settings$.switchMap(({ invoiceNumber }) =>
+            this._dataService.updateInvoice({ ...invoice, status: invoiceStatus.invoiceDone, invoiceNumber: `${year}-${invoiceNumber}`, comment: '' }, true))
+        }
+      })
       .first()
       .toPromise()
       .then(() => this._router.navigate(['../../../read'], { relativeTo: this._route }))

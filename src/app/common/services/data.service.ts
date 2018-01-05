@@ -59,7 +59,7 @@ export class DataService {
   share$: Observable<any>
 
   // actual year
-  year$: Observable<number>
+  // year$: Observable<number>
 
   constructor(
     public _odb: AngularFireOfflineDatabase,
@@ -70,7 +70,7 @@ export class DataService {
     this.uid$ = this._auth.authState.filter(user => !!user).map(({ uid }) => uid)
 
     // available offline
-    this.year$ = this._odb.object('public/year').map(s => s.$value)
+    // this.year$ = this._odb.object('public/year').map(s => s.$value)
 
     this.breeds$ = this.uid$.switchMap(uid => this._odb.list(`users/${uid}/breeds`))
       .map((breeds: Breed[]) => breeds.sort((a: Breed, b: Breed) => a.name >= b.name ? 1 : -1))
