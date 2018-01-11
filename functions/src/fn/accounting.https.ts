@@ -39,7 +39,7 @@ export const accounting = functions.https.onRequest((req, res) => {
                       .reduce((__acc, invoice) => {
                         const { invoiceNumber, amount, fees, discount, vat, emissionDate } = invoice as Invoice
                         const subtotal = amount + fees - discount
-                        const total = amount * (100 + vat) / 100
+                        const total = subtotal * (100 + vat) / 100
                         const paidInvoice = { emissionDate, invoiceNumber, name, total }
                         return [...__acc, paidInvoice]
                       }, [])
