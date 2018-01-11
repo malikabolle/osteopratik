@@ -1,0 +1,150 @@
+[debug] [2018-01-07T10:25:59.497Z] ----------------------------------------------------------------------
+[debug] [2018-01-07T10:25:59.499Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Thibault\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve --only functions
+[debug] [2018-01-07T10:25:59.499Z] CLI Version:   3.16.0
+[debug] [2018-01-07T10:25:59.499Z] Platform:      win32
+[debug] [2018-01-07T10:25:59.499Z] Node Version:  v8.9.1
+[debug] [2018-01-07T10:25:59.499Z] Time:          Sun Jan 07 2018 11:25:59 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T10:25:59.499Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-01-07T10:25:59.506Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-01-07T10:25:59.506Z] > authorizing via signed-in user
+[debug] [2018-01-07T10:25:59.508Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/osteo-pratik  
+  
+ Sun Jan 07 2018 11:25:59 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T10:26:00.178Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-07T10:26:00.179Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/osteo-pratik/tokens  
+  
+ Sun Jan 07 2018 11:26:00 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T10:26:00.772Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Thibault\Documents\personnal\programming\osteopratik'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-01-07T10:26:01.246Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/osteo-pratik  
+  
+ Sun Jan 07 2018 11:26:01 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T10:26:01.246Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/osteo-pratik/apiKeys  
+  
+ Sun Jan 07 2018 11:26:01 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T10:26:02.051Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-07T10:26:02.254Z] <<< HTTP RESPONSE 200
+[info] +  functions: accounting: http://localhost:5000/osteo-pratik/us-central1/accounting
+[info] +  functions: annualBreedsStatistics: http://localhost:5000/osteo-pratik/us-central1/annualBreedsStatistics
+[info] +  functions: annualRevenueStatistics: http://localhost:5000/osteo-pratik/us-central1/annualRevenueStatistics
+[info] +  functions: backup: http://localhost:5000/osteo-pratik/us-central1/backup
+[info] +  functions: changeInvoiceNumber: http://localhost:5000/osteo-pratik/us-central1/changeInvoiceNumber
+[debug] [2018-01-07T16:28:28.747Z] ----------------------------------------------------------------------
+[debug] [2018-01-07T16:28:28.749Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Thibault\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve --only functions
+[debug] [2018-01-07T16:28:28.749Z] CLI Version:   3.16.0
+[debug] [2018-01-07T16:28:28.749Z] Platform:      win32
+[debug] [2018-01-07T16:28:28.749Z] Node Version:  v8.9.1
+[debug] [2018-01-07T16:28:28.749Z] Time:          Sun Jan 07 2018 17:28:28 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:28:28.750Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-01-07T16:28:28.757Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-01-07T16:28:28.757Z] > authorizing via signed-in user
+[debug] [2018-01-07T16:28:28.758Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-01-07T16:28:28.759Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/GCyJfSFRtXIJX_b1SI9kMlm43lPZ07h8K83BBn0SWjw',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Sun Jan 07 2018 17:28:28 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:28:28.889Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-07T16:28:28.894Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/osteo-pratik  
+  
+ Sun Jan 07 2018 17:28:28 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:28:29.566Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-07T16:28:29.566Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/osteo-pratik/tokens  
+  
+ Sun Jan 07 2018 17:28:29 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:28:30.296Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Thibault\Documents\personnal\programming\osteopratik'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-01-07T16:28:30.811Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/osteo-pratik  
+  
+ Sun Jan 07 2018 17:28:30 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:28:30.811Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/osteo-pratik/apiKeys  
+  
+ Sun Jan 07 2018 17:28:30 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:28:31.639Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-07T16:28:31.776Z] <<< HTTP RESPONSE 200
+[info] +  functions: accounting: http://localhost:5000/osteo-pratik/us-central1/accounting
+[info] +  functions: annualRevenueStatistics: http://localhost:5000/osteo-pratik/us-central1/annualRevenueStatistics
+[info] +  functions: annualBreedsStatistics: http://localhost:5000/osteo-pratik/us-central1/annualBreedsStatistics
+[info] +  functions: backup: http://localhost:5000/osteo-pratik/us-central1/backup
+[info] Shutting down...
+[debug] [2018-01-07T16:32:20.960Z] ----------------------------------------------------------------------
+[debug] [2018-01-07T16:32:20.962Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Thibault\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve --only functions
+[debug] [2018-01-07T16:32:20.962Z] CLI Version:   3.16.0
+[debug] [2018-01-07T16:32:20.962Z] Platform:      win32
+[debug] [2018-01-07T16:32:20.962Z] Node Version:  v8.9.1
+[debug] [2018-01-07T16:32:20.962Z] Time:          Sun Jan 07 2018 17:32:20 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:32:20.962Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-01-07T16:32:20.969Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-01-07T16:32:20.970Z] > authorizing via signed-in user
+[debug] [2018-01-07T16:32:20.971Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/osteo-pratik  
+  
+ Sun Jan 07 2018 17:32:20 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:32:21.666Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-07T16:32:21.666Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/osteo-pratik/tokens  
+  
+ Sun Jan 07 2018 17:32:21 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:32:22.269Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Thibault\Documents\personnal\programming\osteopratik'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-01-07T16:32:22.759Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/osteo-pratik  
+  
+ Sun Jan 07 2018 17:32:22 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:32:22.759Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/osteo-pratik/apiKeys  
+  
+ Sun Jan 07 2018 17:32:22 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:32:23.630Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-07T16:32:23.756Z] <<< HTTP RESPONSE 200
+[info] +  functions: annualRevenueStatistics: http://localhost:5000/osteo-pratik/us-central1/annualRevenueStatistics
+[info] +  functions: backup: http://localhost:5000/osteo-pratik/us-central1/backup
+[info] +  functions: accounting: http://localhost:5000/osteo-pratik/us-central1/accounting
+[info] +  functions: annualBreedsStatistics: http://localhost:5000/osteo-pratik/us-central1/annualBreedsStatistics
+[info] Shutting down...
+[debug] [2018-01-07T16:33:00.606Z] ----------------------------------------------------------------------
+[debug] [2018-01-07T16:33:00.607Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Thibault\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve --only functions
+[debug] [2018-01-07T16:33:00.607Z] CLI Version:   3.16.0
+[debug] [2018-01-07T16:33:00.607Z] Platform:      win32
+[debug] [2018-01-07T16:33:00.607Z] Node Version:  v8.9.1
+[debug] [2018-01-07T16:33:00.607Z] Time:          Sun Jan 07 2018 17:33:00 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:33:00.608Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-01-07T16:33:00.614Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-01-07T16:33:00.615Z] > authorizing via signed-in user
+[debug] [2018-01-07T16:33:00.616Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/osteo-pratik  
+  
+ Sun Jan 07 2018 17:33:00 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:33:01.373Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-07T16:33:01.373Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/osteo-pratik/tokens  
+  
+ Sun Jan 07 2018 17:33:01 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:33:02.068Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Thibault\Documents\personnal\programming\osteopratik'...
+[info] 
+[info] i  functions: Preparing to emulate functions.
+[debug] [2018-01-07T16:33:02.547Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/osteo-pratik  
+  
+ Sun Jan 07 2018 17:33:02 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:33:02.548Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/osteo-pratik/apiKeys  
+  
+ Sun Jan 07 2018 17:33:02 GMT+0100 (W. Europe Standard Time)
+[debug] [2018-01-07T16:33:03.336Z] <<< HTTP RESPONSE 200
+[debug] [2018-01-07T16:33:03.648Z] <<< HTTP RESPONSE 200
+[info] +  functions: accounting: http://localhost:5000/osteo-pratik/us-central1/accounting
+[info] +  functions: annualBreedsStatistics: http://localhost:5000/osteo-pratik/us-central1/annualBreedsStatistics
+[info] +  functions: annualRevenueStatistics: http://localhost:5000/osteo-pratik/us-central1/annualRevenueStatistics
+[info] +  functions: backup: http://localhost:5000/osteo-pratik/us-central1/backup
+[info] +  functions: importCustomers: http://localhost:5000/osteo-pratik/us-central1/importCustomers
+[info] Shutting down...

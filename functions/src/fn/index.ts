@@ -6,3 +6,6 @@ export * from './customer-transfer.database'
 export * from './profile-update.database'
 export * from './user-create.database'
 export * from './year-update.database'
+// export * from './__dont-deploy__change-invoice-number'
+// export * from './__dont-deploy__import-customer'
+
