@@ -42,21 +42,17 @@ export class InvoiceUpdateComponent implements OnInit {
 
     const lastInvoiceYear$ = this._dataService.allInvoices$
       .first()
-      .defaultIfEmpty([])
-      .map(invoices => invoices.sort((a, b) => a.invoiceNumber > b.invoiceNumber ? 1 : -1))
-      .map(invoices => invoices.filter(_invoice => !!_invoice.invoiceNumber))
-      .map(invoices => invoices[invoices.length - 1])
+      .map(invoices => invoices.sort((a, b) => a && b && a.invoiceNumber > b.invoiceNumber ? 1 : -1))
+      .switchMap(x => x)
+      .last()
+      .filter(_invoice => !!_invoice.invoiceNumber)
       .map(({ invoiceNumber }) => +(invoiceNumber as string).split('-')[0])
-      .do(console.log)
-      .defaultIfEmpty((new Date()).getFullYear())
-      .do(console.log)
+      .defaultIfEmpty(new Date().getFullYear())
 
 
     lastInvoiceYear$
-      .defaultIfEmpty((new Date()).getFullYear())
       .switchMap((lastInvoiceYear) => {
         const year = new Date().getFullYear()
-        console.log(year, lastInvoiceYear, invoice)
         if (lastInvoiceYear !== year) {
           return Observable
             .fromPromise(this._dataService.updateSettings({ invoiceNumber: 1 }))
