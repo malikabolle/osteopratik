@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, forwardRef, ElementRef, ViewChi
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { NG_VALUE_ACCESSOR, FormGroup, ControlValueAccessor } from '@angular/forms'
 import { FieldConfig } from '../../models/field-config.interface'
-import ImageCompressor from '@xkeshi/image-compressor'
+import ImageCompressor from 'image-compressor.js'
 
 @Component({
   providers: [{

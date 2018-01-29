@@ -37,7 +37,7 @@
     "@angular/service-worker": "^1.0.0-beta.16",
     "@types/chartjs": "0.0.30",
     "@types/localforage": "0.0.34",
-    "@xkeshi/image-compressor": "github:xkeshi/image-compressor",
+    "image-compressor.js": "1.0.0",
     "angularfire2": "4.0.0-rc.1",
     "angularfire2-offline": "4.3.0",
     "chart.js": "^2.6.0",
