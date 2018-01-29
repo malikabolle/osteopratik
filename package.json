@@ -1,6 +1,6 @@
 {
   "name": "osteopratik",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "All right resserved",
   "scripts": {
     "ng": "ng",
