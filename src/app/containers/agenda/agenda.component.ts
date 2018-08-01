@@ -41,7 +41,7 @@ export class AgendaComponent implements OnInit {
         consultationDate.setHours(+hours)
         consultationDate.setHours(+minutes)
         const datePassed = now < +consultationDate
-        const openStatus = status === consultationStatus.consultationProgrammed || status === consultationStatus.consultationCanceled
+        const openStatus = status === consultationStatus.consultationProgrammed // || status === consultationStatus.consultationCanceled
         return openStatus || datePassed
       }))
     this.consultations$.subscribe(console.log)
