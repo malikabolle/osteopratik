@@ -11,19 +11,19 @@
   <ng-container cdkColumnDef="firstName">
     <mat-header-cell *cdkHeaderCellDef
                      mat-sort-header> Prénom </mat-header-cell>
-    <mat-cell *cdkCellDef="let row"> {{row.firstName}} </mat-cell>
+    <mat-cell *cdkCellDef="let row"> {{row.profile.firstName}} </mat-cell>
   </ng-container>
 
   <ng-container cdkColumnDef="lastName">
     <mat-header-cell *cdkHeaderCellDef
                      mat-sort-header> Nom </mat-header-cell>
-    <mat-cell *cdkCellDef="let row"> {{row.lastName}} </mat-cell>
+    <mat-cell *cdkCellDef="let row"> {{row.profile.lastName}} </mat-cell>
   </ng-container>
 
   <ng-container cdkColumnDef="email">
     <mat-header-cell *cdkHeaderCellDef
                      mat-sort-header> Email </mat-header-cell>
-    <mat-cell *cdkCellDef="let row"> {{row.email}} </mat-cell>
+    <mat-cell *cdkCellDef="let row"> {{row.profile.email}} </mat-cell>
   </ng-container>
 
   <ng-container cdkColumnDef="active">

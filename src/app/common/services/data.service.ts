@@ -26,6 +26,7 @@ export class DataService {
 
   profile$: Observable<Profile>
   profiles$: Observable<Profile[]>
+  users$: Observable<Profile[]>
 
   access$: Observable<any>
   accesses$: Observable<{ active: boolean, admin: boolean, $key?: string, $exists?: string, $value?: string }[]>
@@ -149,6 +150,8 @@ export class DataService {
 
     this.profiles$ = this._db.list(`public/users/profiles`)
 
+    this.users$ = this._db.list(`users`)
+
     this.accesses$ = this._db.list(`public/users/profiles`).map(keys => toArray(keys))
 
     this.allInvoices$ = this.customers$
@@ -172,7 +175,15 @@ export class DataService {
   }
 
   updateProfile(profile: Profile | any) {
+    this.updatePublicProfile(profile);
     return this.uid$.switchMap(uid => this._odb.object(`users/${uid}/profile`).update({ ...profile })['offline'])
+      .first()
+      .toPromise()
+  }
+
+  // Update public profile.
+  private updatePublicProfile(profile: Profile | any) {
+    return this.uid$.switchMap(uid => this._odb.object(`public/users/profiles/${uid}`).update({ ...profile })['offline'])
       .first()
       .toPromise()
   }

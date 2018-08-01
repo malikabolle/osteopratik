@@ -34,8 +34,8 @@ export class AccessUpdateComponent implements OnInit {
   ngOnInit() {
     // remove self from list to avoid bricking
     this.users$ = this._dataService.uid$
-      .switchMap((uid) => this._dataService.profiles$
-        .switchMap(profiles => profiles)
+      .switchMap((uid) => this._dataService.users$
+        .switchMap(users => users)
         .filter(({ $key }) => $key !== uid)
         .mergeMap((profile) => {
           const { $key } = profile

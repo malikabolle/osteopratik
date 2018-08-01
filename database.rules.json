@@ -3,7 +3,9 @@
     // user light data (string, boolean, number)
     // available offline
     "users": {
+      ".read": "root.child('users').child(auth.uid).child('access').child('admin').val() === true",
       "$uid": {
+      	".read": "root.child('users').child(auth.uid).child('access').child('admin').val() === true",
         "access": {
           ".read": "auth.uid === $uid || root.child('users').child(auth.uid).child('access').child('admin').val() === true",
           "active": {
@@ -31,7 +33,7 @@
         "settings": {
           ".read": "auth.uid === $uid || root.child('users').child(auth.uid).child('access').child('admin').val() === true",
           ".write": "auth.uid === $uid"
-        },
+        }
       }
     },
     // user heavy data (base64, ...)
@@ -42,7 +44,7 @@
         ".write": "auth.uid === $uid"
       }
     },
-    // shared data    
+    // shared data
     // available online only
     "share": {
       "$uid": {
@@ -52,7 +54,7 @@
         }
       }
     },
-    // let the target know that shared data is available    
+    // let the target know that shared data is available
     // available online only
     "share-access": {
       "$access": {
@@ -63,11 +65,18 @@
       }
     },
     // public (active account only) directory
-    // writes are done via cloud functions on database / auth triggers    
-    // available online only 
+    // writes are done via cloud functions on database / auth triggers
+    // available online only
+    // CHANGE: Cloud function not working, allowing uid to update the data.
     "public": {
       ".read": "true",
-      ".write": "false"
+      "users" : {
+        "profiles": {
+          "$uid": {
+            ".write": "auth.uid === $uid"
+          }
+        }
+      }
     }
   }
 }
