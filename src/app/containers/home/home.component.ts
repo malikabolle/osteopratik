@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
       )
     })
       .first()
-      .do(console.log)
+      // .do(console.log)
       .subscribe()
   }
 }

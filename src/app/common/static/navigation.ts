@@ -28,7 +28,7 @@ const active = [
   new SidenavLink('Clients', 'customer-lazy/customers', 'people', false, false, false, false),
   new SidenavLink('Finance', 'invoice-lazy/invoices', 'account_balance', false, false, false, false),
   new SidenavLink('Comptabilité', 'accounting-lazy', 'attach_money', false, false, false, false),
-  new SidenavLink('Satistiques', 'statistics-lazy', 'pie_chart', false, false, false, false),
+  new SidenavLink('Statistiques', 'statistics-lazy', 'pie_chart', false, false, false, false),
 ]
 const support = [
   new SidenavLink('Support', '', '', true, false, false, false),
@@ -53,9 +53,6 @@ export const visitorNavigation = [
 
 export const inactiveAccountNavigation = [
   ...signed,
-  ...inactive,
-  ...support,
-  ...about,
 ]
 
 export const activeAccountNavigation = [

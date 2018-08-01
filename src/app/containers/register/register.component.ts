@@ -1,5 +1,6 @@
 import { Router } from '@angular/router'
 import { AngularFireAuth } from 'angularfire2/auth'
+import { AngularFireOfflineDatabase } from 'angularfire2-offline'
 import { UiFeedbackService } from './../../common/services/ui-feedback.service'
 import { DataService } from './../../common/services/data.service'
 import { Component, ChangeDetectionStrategy, OnInit, ViewChild } from '@angular/core'
@@ -8,6 +9,8 @@ import { currencies, CurrencyEUR } from './../../common/models/currency'
 import { MatSelectChange } from '@angular/material/select'
 import { MatCheckboxChange } from '@angular/material/checkbox'
 import { MatButton } from '@angular/material/button'
+import { MatDialog, MatDialogRef } from '@angular/material';
+import * as localForage from 'localforage'
 
 @Component({
   selector: 'app-register',
@@ -30,7 +33,9 @@ export class RegisterComponent implements OnInit {
     private _dataService: DataService,
     private _feedbackService: UiFeedbackService,
     private _auth: AngularFireAuth,
-    private _router: Router
+    private _odb: AngularFireOfflineDatabase,
+    private _router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -104,9 +109,61 @@ export class RegisterComponent implements OnInit {
       })
       .first()
       .toPromise()
-      .then(() => this._router.navigate(['/shell']))
+      // .then(() => this._router.navigate(['/shell?register=1']))
+      .then(() => this.openDialog())
       .then((response: any | null | undefined) => this._feedbackService.success$$.next())
       .catch((error: Error | any) => this._feedbackService.error$$.next(error))
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmRegisterDialogComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.logout();
+    });
+  }
+
+  logout() {
+    return this._auth.auth.signOut()
+      .then(() => {
+        localStorage.clear()
+        localForage.getItem('write')
+          .then((item: any) => {
+            if (item) {
+              const { cache } = item
+              const _cache = []
+              for (const k in cache) {
+                if (cache.hasOwnProperty(k)) {
+                  _cache.push(cache[k])
+                }
+              }
+              return localForage.removeItem('token')
+                .then(() => {
+                  if (!_cache.length) {
+                    this._odb.reset()
+                  }
+                })
+            }
+          })
+        return this._router.navigate(['/shell'])
+      })
+      .catch((error: Error | any) => this._feedbackService.error$$.next(error));
+  }
+
+}
+
+@Component({
+  selector: 'app-confirm-register-dialog',
+  templateUrl: 'confirm-register-dialog.html',
+})
+export class ConfirmRegisterDialogComponent {
+
+  constructor(public dialogRef: MatDialogRef<ConfirmRegisterDialogComponent>) {}
+
+  onClick(): void {
+    this.dialogRef.close();
   }
 
 }

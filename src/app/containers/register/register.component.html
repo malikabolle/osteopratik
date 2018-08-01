@@ -33,13 +33,13 @@
           <mat-form-field fxFlex="1 1 auto">
             <input matInput
                    type="text"
-                   placeholder="Prénom"
+                   placeholder="Prénom *"
                    formControlName="firstName">
           </mat-form-field>
           <mat-form-field fxFlex="1 1 auto">
             <input matInput
                    type="text"
-                   placeholder="Nom"
+                   placeholder="Nom *"
                    formControlName="lastName">
           </mat-form-field>
         </div>
@@ -52,7 +52,7 @@
           <mat-form-field fxFlex="1 1 auto">
             <input matInput
                    type="tel"
-                   placeholder="Tel."
+                   placeholder="Tel. *"
                    formControlName="tel">
           </mat-form-field>
 
@@ -97,7 +97,7 @@
           <mat-form-field fxFlex="1 1 auto">
             <input type="text"
                    matInput
-                   placeholder="Rue & Numéro"
+                   placeholder="Rue & Numéro *"
                    formControlName="street">
           </mat-form-field>
         </div>
@@ -110,7 +110,7 @@
           <mat-form-field fxFlex="1 1 auto">
             <input type="text"
                    matInput
-                   placeholder="Ville"
+                   placeholder="Ville *"
                    formControlName="city">
             <mat-hint align="start">Ville ou Village ou Localité</mat-hint>
           </mat-form-field>
@@ -118,7 +118,7 @@
           <mat-form-field fxFlex="1 1 auto">
             <input type="text"
                    matInput
-                   placeholder="Code postal"
+                   placeholder="Code postal *"
                    formControlName="zip">
           </mat-form-field>
         </div>
@@ -132,7 +132,7 @@
           <mat-form-field fxFlex="1 1 auto">
             <input type="text"
                    matInput
-                   placeholder="Pays"
+                   placeholder="Pays *"
                    formControlName="country"
                    [matAutocomplete]="autoCompleteCountryRef">
             <mat-autocomplete [style.display]="'hidden'"
@@ -176,7 +176,7 @@
             <input matInput
                    type="number"
                    formControlName="vat"
-                   placeholder="TVA">
+                   placeholder="TVA *">
             <span matSuffix>%</span>
           </mat-form-field>
 
@@ -184,7 +184,7 @@
             <input matInput
                    type="number"
                    formControlName="invoiceNumber"
-                   placeholder="Numéro de la prochaine facture">
+                   placeholder="Numéro de la prochaine facture *">
             <mat-hint align="start">
               <strong>Attention</strong>: Ce paramètre ne peut être éditer qu'une seule fois</mat-hint>
           </mat-form-field>
@@ -197,7 +197,7 @@
              fxLayoutGap.xs="16px"
              fxLayoutAlign="start center">
           <mat-form-field fxFlex="1 1 auto">
-            <mat-select placeholder="Devise"
+            <mat-select placeholder="Devise *"
                         (change)="handleCurrencyChange($event)"
                         formControlName="currency">
               <mat-option *ngFor="let c of currencies"
@@ -227,7 +227,7 @@
             <input matInput
                    type="string"
                    formControlName="iban"
-                   placeholder="IBAN">
+                   placeholder="IBAN *">
           </mat-form-field>
 
           <mat-form-field>

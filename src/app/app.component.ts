@@ -10,6 +10,7 @@ export class AppComponent {
   constructor(
   ) {
     const mode = environment.production ? 'PROD' : 'DEV'
+    /*
     console.log(`Mode                ${mode}
 Version             ${environment.version}
 Source              https://github.com/malikabolle/osteopratik
@@ -18,5 +19,6 @@ By                  Thibault Savary
 Contact             thibaultsavary@protonmail.ch
 Copyright (c) 2017, Osteopratik
 `)
+*/
   }
 }
