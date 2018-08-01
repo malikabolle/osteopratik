@@ -22,7 +22,7 @@ import { UiFeedbackService } from './../../../common/services/ui-feedback.servic
 const filterable = new Map()
 filterable.set('name', 'Nom')
 filterable.set('sex', 'Sexe')
-filterable.set('breed', 'Race')
+filterable.set('breed', 'Espèce')
 
 @Component({
   selector: 'app-consultation-details',

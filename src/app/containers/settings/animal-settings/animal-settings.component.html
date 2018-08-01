@@ -6,7 +6,7 @@
 
   <mat-card>
     <mat-card-subtitle>
-      <h4>Définir le montant par défault en fonction de la race</h4>
+      <h4>Définir le montant par défault en fonction de l'espèce</h4>
     </mat-card-subtitle>
 
     <mat-card-content>
@@ -22,7 +22,7 @@
              fxLayoutGap.xs="16px"
              fxLayoutAlign="start center">
           <mat-form-field fxFlex="1 1 auto">
-            <mat-select placeholder="Race"
+            <mat-select placeholder="Espèce"
                         formControlName="name"
                         (change)="handleBreedChange($event)">
 
@@ -59,7 +59,7 @@
 
   <mat-card>
     <mat-card-subtitle>
-      <h4> Ajouter une nouvelle race</h4>
+      <h4> Ajouter une nouvelle espèce</h4>
     </mat-card-subtitle>
 
     <mat-card-content>
@@ -78,7 +78,7 @@
             <input matInput
                    type="text"
                    formControlName="name"
-                   placeholder="Race"
+                   placeholder="Espèce"
                    #breedAddRef>
           </mat-form-field>
 

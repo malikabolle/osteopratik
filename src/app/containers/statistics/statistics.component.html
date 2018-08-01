@@ -1,6 +1,6 @@
 <h2>Statistiques</h2>
 <ng-container *ngIf="(annualBreedsData$ | async)?.datasets; else loadingTemplate">
-  <h3>Races</h3>
+  <h3>Espèces</h3>
   <app-chart [data]="annualBreedsData$ | async"
              [options]="annualBreedsOptions$ | async"></app-chart>
 </ng-container>

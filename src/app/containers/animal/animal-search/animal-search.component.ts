@@ -153,4 +153,4 @@ class AnimalsDataSource extends DataSource<any> {
 
 const filterable = new Map()
 filterable.set('name', 'Nom')
-filterable.set('breed', 'Race')
+filterable.set('breed', 'Espèce')

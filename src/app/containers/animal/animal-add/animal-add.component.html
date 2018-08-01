@@ -48,7 +48,7 @@
         </mat-form-field>
         <mat-form-field fxFlex="1 1 50%"
                         fxFlex.xs="1 1 auto">
-          <mat-select placeholder="Race"
+          <mat-select placeholder="Espèce"
                       formControlName="breedKey">
             <mat-option *ngFor="let breed of breeds$ | async"
                         [value]="breed.$key">{{breed.name}}</mat-option>

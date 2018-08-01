@@ -72,7 +72,7 @@ Il est aussi possible d'utiliser la synthaxe [markdown](https://github.com/adam-
 {fill}
 {logo}
 {end}
-  
+
 ***
 ```
 
@@ -100,7 +100,7 @@ Rien de spécial à préciser, le chargement peut être relativement long sur le
 
 ## Paramètres
 ### Animaux
-Permet d'ajouter et de modifier les races. 
+Permet d'ajouter et de modifier les espèces. 
 
 ### Finance
 Permet de spécifier les informations nécessaires pour le paiement et pour la comptabilité.

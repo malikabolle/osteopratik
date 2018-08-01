@@ -16,7 +16,7 @@ import { DataService } from './../../../common/services/data.service'
 const filterable = new Map()
 filterable.set('name', 'Nom')
 filterable.set('sex', 'Sexe')
-filterable.set('breed', 'Race')
+filterable.set('breed', 'Espèce')
 
 @Component({
   selector: 'app-customer-details',

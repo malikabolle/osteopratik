@@ -48,7 +48,7 @@ export const annualBreedsStatistics = functions.https.onRequest((req, res) => {
               })
               .reduce((acc, curr) => [...acc, ...curr], [])
               .reduce((acc, { name, count, sum }) => {
-                if (acc === null) { acc = defaultDatasetFactory([`Nombre de consultation par race à l'année`, `Chiffre d'affaire par race à l'année`], 2) }
+                if (acc === null) { acc = defaultDatasetFactory([`Nombre de consultation par espèce à l'année`, `Chiffre d'affaire par espèce à l'année`], 2) }
                 const index = acc.labels.indexOf(name)
                 if (index !== -1) {
                   acc.datasets[0].data[index] += count

@@ -76,8 +76,8 @@
            fxLayoutAlign="start center">
         <span fxFlex="1 1 75px">Adresse</span>
         <span fxFlex>
-      {{customer.address.street}}, {{customer.address.zip}} - {{customer.address.city}}  
-      {{customer.address.region}}, {{customer.address.country}}  
+      {{customer.address.street}}, {{customer.address.zip}} - {{customer.address.city}}
+      {{customer.address.region}}, {{customer.address.country}}
   </span>
       </div>
     </mat-card>
@@ -202,7 +202,7 @@
 
   <ng-container cdkColumnDef="breed">
     <mat-header-cell *cdkHeaderCellDef
-                     mat-sort-header> Race </mat-header-cell>
+                     mat-sort-header> Espèce </mat-header-cell>
     <mat-cell *cdkCellDef="let row"> {{row.breed | unhash }} </mat-cell>
   </ng-container>
 
