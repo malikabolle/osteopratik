@@ -73,7 +73,7 @@
       "users" : {
         "profiles": {
           "$uid": {
-            ".write": "auth.uid === $uid"
+            ".write": "auth.uid === $uid || root.child('users').child(auth.uid).child('access').child('admin').val() === true"
           }
         }
       }
