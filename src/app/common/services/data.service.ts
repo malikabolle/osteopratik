@@ -206,9 +206,9 @@ export class DataService {
 
   addCustomer(customer: Customer) {
     return this.uid$.switchMap(uid => {
-      const { street, zip, city, region, country } = customer.address
+      const { street, zip, city, country } = customer.address
       return this._geocoderService
-        .geocode(street, zip, city, region, country)
+        .geocode(street, zip, city, country)
         .switchMap(latlng => {
           customer.latlng = latlng
           return this._odb.list(`users/${uid}/customers`).push(customer)['offline']
@@ -220,10 +220,10 @@ export class DataService {
 
   updateCustomer(customerKey: string, customer: Customer | any) {
     return this.uid$.switchMap(uid => {
-      const { street, zip, city, region, country } = customer.address
+      const { street, zip, city, country } = customer.address
       if (navigator.onLine) {
         return this._geocoderService
-          .geocode(street, zip, city, region, country)
+          .geocode(street, zip, city, country)
           .switchMap(latlng => {
             customer.latlng = latlng
             return this._odb.object(`users/${uid}/customers/${customerKey}`).update({ ...customer })['offline']

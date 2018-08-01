@@ -47,7 +47,6 @@ export class CustomerAddComponent implements OnInit {
         street: ['', Validators.required],
         zip: ['', Validators.required],
         city: [''],
-        region: [''],
         country: [''],
       })
     })

@@ -8,9 +8,9 @@ export class GeocoderService {
 
   constructor(private _http: Http, ) { }
 
-  geocode(street: string, zip: string, city: string, region: string, country: string): Observable<{ lat: number, lng: number }> {
+  geocode(street: string, zip: string, city: string, country: string): Observable<{ lat: number, lng: number }> {
     const compositeAddress = []
-    compositeAddress.push(street, zip, city, region, country)
+    compositeAddress.push(street, zip, city, country)
     const url = `https://maps.googleapis.com/maps/api/geocode/json?key=${GOOGLE_MAP_API_KEY}&address=${compositeAddress.join(',')}`
     if (navigator.onLine) {
       return this._http.get(url)

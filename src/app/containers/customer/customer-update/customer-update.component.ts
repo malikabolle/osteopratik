@@ -53,7 +53,6 @@ export class CustomerUpdateComponent implements OnInit {
         street: ['', Validators.required],
         zip: ['', Validators.required],
         city: ['', Validators.required],
-        region: ['', Validators.required],
         country: ['', Validators.required]
       })
     })
