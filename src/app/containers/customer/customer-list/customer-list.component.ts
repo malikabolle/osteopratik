@@ -146,8 +146,8 @@ class CustomersDataSource extends DataSource<any> {
     switch (this._sort.active) {
       case 'name':
         [propertyA, propertyB] = [
-          a.firstName + a.lastName,
-          b.firstName + b.lastName
+          a.lastName + a.firstName,
+          b.lastName + b.firstName
         ]
         break
     }
@@ -163,7 +163,7 @@ class CustomersDataSource extends DataSource<any> {
   private _filterFn = x => {
     const searchStr: string =
       this.filteredField$$.value === 'name'
-        ? (x['firstName'] + x['lastName']).toLowerCase()
+        ? (x['lastName'] + x['firstName']).toLowerCase()
         : (x[this.filteredField$$.value] || '').toString().toLowerCase()
     return searchStr.includes(this.filter$$.value.toLowerCase())
   }
