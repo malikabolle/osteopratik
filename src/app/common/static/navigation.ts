@@ -48,9 +48,7 @@ const about = [
 
 
 export const visitorNavigation = [
-  ...unsigned,
-  ...support,
-  ...about,
+  ...unsigned
 ]
 
 export const inactiveAccountNavigation = [
@@ -74,4 +72,3 @@ export const adminNavigation = [
   ...support,
   ...about,
 ]
-
