@@ -18,7 +18,9 @@
        fxLayoutAlign="end">
     <div class="address"
          [style.minWidth.px]="200">
-      <div>{{customer.firstName}} {{customer.lastName}}</div>
+      <div *ngIf="customer.company;then showCompany;else showNames"></div>
+      <ng-template #showCompany>{{customer.company}}</ng-template>
+      <ng-template #showNames>{{customer.firstName}} {{customer.lastName}}</ng-template>
       <div>{{customer.address.street}}</div>
       <div>{{customer.address.zip}} - {{customer.address.city}}</div>
       <div>{{customer.address.country}}</div>
