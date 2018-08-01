@@ -45,7 +45,7 @@ export class CustomerAddComponent implements OnInit {
       company: [''],
       address: this._formBuilder.group({
         street: ['', Validators.required],
-        zip: ['', Validators.required],
+        zip: [''],
         city: [''],
         country: [''],
       })

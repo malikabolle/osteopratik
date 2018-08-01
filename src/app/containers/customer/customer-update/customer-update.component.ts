@@ -44,16 +44,16 @@ export class CustomerUpdateComponent implements OnInit {
 
   private _createForm() {
     this.form = this._formBuilder.group({
-      firstName: ['', Validators.required],
+      firstName: [''],
       lastName: ['', Validators.required],
       tel: ['', Validators.required],
       email: [''],
       company: [''],
       address: this._formBuilder.group({
         street: ['', Validators.required],
-        zip: ['', Validators.required],
-        city: ['', Validators.required],
-        country: ['', Validators.required]
+        zip: [''],
+        city: [''],
+        country: [''],
       })
     })
   }

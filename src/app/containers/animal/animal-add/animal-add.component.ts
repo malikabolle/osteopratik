@@ -45,9 +45,9 @@ export class AnimalAddComponent implements OnInit {
 
   private _createForm() {
     this.form = this._formBuilder.group({
-      name: ['', Validators.required],
-      birthday: [new Date(), Validators.required],
-      sex: ['', Validators.required],
+      name: [''],
+      birthday: [new Date()],
+      sex: [''],
       breedKey: ['', Validators.required],
       background: ['']
     })
