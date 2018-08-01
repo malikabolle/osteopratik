@@ -11,7 +11,7 @@
         <span fxFlex></span>
         <button *ngIf="consultation.status !== consultationStatus.consultationTransferred"
                 [disabled]="(invoice$ | async)?.status === invoiceStatus.invoiceDone || (invoice$ | async)?.status === invoiceStatus.invoiceEmitted || (invoice$ | async)?.status === invoiceStatus.invoicePaid "
-    
+
                 mat-fab
                 (click)="navigate(['../update'], { relativeTo: this._route})"
                 color="primary"
@@ -243,7 +243,7 @@
                          fxLayoutAlign="start center">
                         <span fxFlex="1 1 120px">Statut</span>
                         <ng-container *ngIf="invoice.status === invoiceStatus.invoiceGenerated; else selectStatusTemplate">
-                            <span>Genérée</span>
+                            <span>Générée</span>
                         </ng-container>
                         <ng-template #selectStatusTemplate>
                             <div [style.paddingRight.px]="18"
