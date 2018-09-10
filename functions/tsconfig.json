@@ -6,20 +6,25 @@
     "index.js"
   ],
   "compileOnSave": true,
+  "files": [
+    "src/index.ts"
+  ],
   "compilerOptions": {
     "moduleResolution": "node",
-    "lib": [
-      "es2016",
-      "es2017"
-    ],
     "outDir": "./dist",
     "rootDir": "./src",
     "target": "es5",
     "module": "commonjs",
     "baseUrl": "",
+    "lib": [
+      "es2015"
+    ],
+    "types": [
+      "node"
+    ],
     "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules/"
+      "node_modules/@types",
+      "node_modules/"
     ]
   }
 }

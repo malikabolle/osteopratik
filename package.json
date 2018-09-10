@@ -12,6 +12,7 @@
     "app-cache": "node ./scripts/app-cache.js",
     "debug-ios": "remotedebug_ios_webkit_adapter",
     "service-worker": "sw-precache --root=dist --config=./scripts/sw-precache-config.js",
+    "functions": "cd functions&&tsc&&cp package.json dist",
     "deploy-dev": "ng build --aot --dev && npm run service-worker && npm run app-cache && firebase deploy",
     "deploy": "npm run build --prod && npm run service-worker && npm run app-cache && firebase deploy",
     "deploy-patch": "npm version patch && npm run build --prod && npm run service-worker && npm run app-cache && firebase deploy",

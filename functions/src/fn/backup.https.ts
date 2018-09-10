@@ -4,9 +4,11 @@ const cors = require('cors')
 import * as fs from 'fs'
 import * as path from 'path'
 
-import * as _storage from '@google-cloud/storage'
-const storage = _storage()
-const appBucketRef = functions.config().firebase.storageBucket
+const {Storage} = require('@google-cloud/storage');
+const storage = new Storage({
+  projectId: 'osteo-pratik', // FIX ME Use config
+});
+const appBucketRef = 'osteo-pratik.appspot.com'; // FIX ME functions.config().firebase.storageBucket
 const appBucketUrl = `gs://${appBucketRef}/`
 const appBucket = storage.bucket(appBucketRef)
 

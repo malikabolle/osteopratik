@@ -2,7 +2,7 @@ import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 
 // Create a public space for reading users data
-export const onProfileUpdate = functions.database.ref('users/{uid}/profile').onWrite(event => {
+export const onProfileUpdate = functions.database.ref('users/{uid}/profile').onWrite((event: any) => {
   const { params } = event
   const { uid } = params
   const { data } = event

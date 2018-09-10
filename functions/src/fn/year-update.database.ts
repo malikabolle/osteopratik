@@ -1,10 +1,10 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
-import { DeltaSnapshot } from 'firebase-functions/lib/providers/database';
+// import { DeltaSnapshot } from 'firebase-functions/lib/providers/database';
 
 export const onYearRead = functions.database
   .ref('users/{uid}/customers/{customerKey}/animals/{animalKey}/consultations/{consultationKey}/invoice')
-  .onUpdate(event => {
+  .onUpdate((event: any) => {
     //   const { data } = event
     //   const { previous, current } = data
 
